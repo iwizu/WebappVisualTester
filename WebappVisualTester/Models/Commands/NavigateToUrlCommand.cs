@@ -8,6 +8,16 @@ namespace WebappVisualTester.Models
     {
 
         public string Url { get; set; }
-
+        public override ICommand GetClone()
+        {
+            return new NavigateToUrlCommand
+            {
+                Id = Guid.NewGuid(),
+                OrderIndex = this.OrderIndex,
+                Title = this.Title,
+                BelongsToCommandIndex = this.BelongsToCommandIndex,
+                Url = this.Url
+            };
+        }
     }
 }

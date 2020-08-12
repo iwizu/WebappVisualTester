@@ -23,7 +23,7 @@ namespace WebappVisualTester
             this.projectManager = projectManager;
         }
 
-        public string Start(List<Command> cmds,ChromeDriver driver)
+        public string Start(List<ICommand> cmds,ChromeDriver driver)
         {
             StringBuilder s = new StringBuilder();
             if (driver == null)
@@ -35,7 +35,7 @@ namespace WebappVisualTester
             {
                 if (cmds == null)
                 {
-                    cmds = test.commands.Where(i => !i.BelongsToCommandIndex.HasValue).OrderBy(i => i.OrderIndex).ToList();
+                    cmds = test.Commands.Where(i => !i.BelongsToCommandIndex.HasValue).OrderBy(i => i.OrderIndex).ToList();
                 }
                 foreach(var cmd in cmds)
                 {
@@ -63,7 +63,7 @@ namespace WebappVisualTester
                         {
                             if (driver.PageSource.Contains(d.IfContainsString))
                             {
-                                var subCommands = test.commands.Where(i => i.BelongsToCommandIndex.HasValue
+                                var subCommands = test.Commands.Where(i => i.BelongsToCommandIndex.HasValue
                                     && i.BelongsToCommandIndex.Equals(d.OrderIndex))
                                     .OrderBy(i => i.OrderIndex).ToList();
                                s.AppendLine(Start(subCommands,driver));
@@ -75,7 +75,7 @@ namespace WebappVisualTester
                         var d = cmd as FillTextboxCommand;
                         if (d != null)
                         {
-                            if (!string.IsNullOrEmpty(d.Id))
+                            if (!string.IsNullOrEmpty(d.ElementId))
                             {
                                 var input = driver.FindElement(By.XPath("//input[@id='" + d.Id + "']"));
                                 if (input != null)

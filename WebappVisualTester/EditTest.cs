@@ -34,9 +34,9 @@ namespace WebappVisualTester
             if (test != null)
             {
                 txtTitle.Text = test.Title;
-                if (test.commands != null & test.commands.Any())
+                if (test.Commands != null & test.Commands.Any())
                 {
-                    var ds= test.commands
+                    var ds= test.Commands
                           .OrderBy(i => i.OrderIndex)
                           .ToList();
                     dgrCommands.DataSource=ds;
@@ -54,7 +54,7 @@ namespace WebappVisualTester
                 var command = dgrCommands.SelectedRows[0].DataBoundItem as Command;
                 if (command != null)
                 {
-                    var orderedCommands = test.commands.OrderBy(i => i.OrderIndex).ToList();
+                    var orderedCommands = test.Commands.OrderBy(i => i.OrderIndex).ToList();
                     var index = orderedCommands.IndexOf(command);
                     if (index > 0)
                     {
@@ -135,9 +135,9 @@ namespace WebappVisualTester
                 var cmd = dgrCommands.SelectedRows[0].DataBoundItem as Command;
                 if (cmd != null)
                 {
-                    var orderedCommands = test.commands.OrderBy(i => i.OrderIndex).ToList();
+                    var orderedCommands = test.Commands.OrderBy(i => i.OrderIndex).ToList();
                     var index = orderedCommands.IndexOf(cmd);
-                    if (index < test.commands.Count - 1)
+                    if (index < test.Commands.Count - 1)
                     {
                         orderedCommands[index + 1].OrderIndex = index+1;
                         orderedCommands[index].OrderIndex = index + 2;
@@ -157,7 +157,7 @@ namespace WebappVisualTester
                 var cmd = dgrCommands.SelectedRows[0].DataBoundItem as Command;
                 if (cmd != null)
                 {
-                    test.commands.Remove(cmd);
+                    test.Commands.Remove(cmd);
                 }
             }
             projectManager.SaveProject();

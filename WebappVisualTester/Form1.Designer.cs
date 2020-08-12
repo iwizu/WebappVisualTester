@@ -31,12 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.btnNewProject = new System.Windows.Forms.Button();
             this.btnOpenProject = new System.Windows.Forms.Button();
-            this.txtProjectFilename = new System.Windows.Forms.TextBox();
+            this.txtProjectTitle = new System.Windows.Forms.TextBox();
             this.btnSaveProject = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgrTests = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDuplicateTest = new System.Windows.Forms.Button();
             this.btnNewTest = new System.Windows.Forms.Button();
             this.btnTestDelete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,6 +45,8 @@
             this.btnTestDown = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblPath = new System.Windows.Forms.Label();
+            this.lblProjectPath = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -66,6 +69,7 @@
             this.btnNewProject.TabIndex = 1;
             this.btnNewProject.Text = "New Project";
             this.btnNewProject.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnNewProject, "New Project");
             this.btnNewProject.UseVisualStyleBackColor = false;
             this.btnNewProject.Click += new System.EventHandler(this.btnNewProject_Click);
             // 
@@ -83,17 +87,18 @@
             this.btnOpenProject.TabIndex = 1;
             this.btnOpenProject.Text = "Open Project";
             this.btnOpenProject.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnOpenProject, "Open Project");
             this.btnOpenProject.UseVisualStyleBackColor = false;
             this.btnOpenProject.Click += new System.EventHandler(this.btnOpenProject_Click);
             // 
-            // txtProjectFilename
+            // txtProjectTitle
             // 
-            this.txtProjectFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtProjectTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProjectFilename.Location = new System.Drawing.Point(275, 15);
-            this.txtProjectFilename.Name = "txtProjectFilename";
-            this.txtProjectFilename.Size = new System.Drawing.Size(891, 27);
-            this.txtProjectFilename.TabIndex = 2;
+            this.txtProjectTitle.Location = new System.Drawing.Point(275, 15);
+            this.txtProjectTitle.Name = "txtProjectTitle";
+            this.txtProjectTitle.Size = new System.Drawing.Size(891, 27);
+            this.txtProjectTitle.TabIndex = 2;
             // 
             // btnSaveProject
             // 
@@ -110,6 +115,7 @@
             this.btnSaveProject.TabIndex = 1;
             this.btnSaveProject.Text = "Save";
             this.btnSaveProject.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnSaveProject, "Save Project");
             this.btnSaveProject.UseVisualStyleBackColor = false;
             this.btnSaveProject.Click += new System.EventHandler(this.btnSaveProject_Click);
             // 
@@ -159,12 +165,14 @@
             this.dgrTests.Size = new System.Drawing.Size(223, 553);
             this.dgrTests.TabIndex = 0;
             this.dgrTests.Text = "dataGridView1";
+            this.toolTip1.SetToolTip(this.dgrTests, "Double click to edit Test");
             this.dgrTests.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrTests_CellContentDoubleClick);
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnDuplicateTest);
             this.panel1.Controls.Add(this.btnNewTest);
             this.panel1.Controls.Add(this.btnTestDelete);
             this.panel1.Controls.Add(this.label1);
@@ -174,6 +182,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(226, 56);
             this.panel1.TabIndex = 0;
+            // 
+            // btnDuplicateTest
+            // 
+            this.btnDuplicateTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDuplicateTest.BackColor = System.Drawing.Color.Transparent;
+            this.btnDuplicateTest.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnDuplicateTest.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnDuplicateTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDuplicateTest.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDuplicateTest.ForeColor = System.Drawing.Color.Blue;
+            this.btnDuplicateTest.Location = new System.Drawing.Point(97, 27);
+            this.btnDuplicateTest.Name = "btnDuplicateTest";
+            this.btnDuplicateTest.Size = new System.Drawing.Size(26, 27);
+            this.btnDuplicateTest.TabIndex = 1;
+            this.btnDuplicateTest.Text = "⎘";
+            this.btnDuplicateTest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnDuplicateTest, "Duplicate Test");
+            this.btnDuplicateTest.UseVisualStyleBackColor = false;
+            this.btnDuplicateTest.Click += new System.EventHandler(this.btnDuplicateTest_Click);
             // 
             // btnNewTest
             // 
@@ -190,6 +217,7 @@
             this.btnNewTest.TabIndex = 1;
             this.btnNewTest.Text = "✎";
             this.btnNewTest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnNewTest, "Create Test");
             this.btnNewTest.UseVisualStyleBackColor = false;
             this.btnNewTest.Click += new System.EventHandler(this.btnNewTest_Click);
             // 
@@ -208,6 +236,7 @@
             this.btnTestDelete.TabIndex = 1;
             this.btnTestDelete.Text = "X";
             this.btnTestDelete.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnTestDelete, "Remove selected Test");
             this.btnTestDelete.UseVisualStyleBackColor = false;
             this.btnTestDelete.Click += new System.EventHandler(this.btnTestDelete_Click);
             // 
@@ -236,6 +265,7 @@
             this.btnTestUp.TabIndex = 1;
             this.btnTestUp.Text = "▲";
             this.btnTestUp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnTestUp, "Move Test one place up");
             this.btnTestUp.UseVisualStyleBackColor = false;
             this.btnTestUp.Click += new System.EventHandler(this.btnTestUp_Click);
             // 
@@ -254,6 +284,7 @@
             this.btnTestDown.TabIndex = 1;
             this.btnTestDown.Text = "▼";
             this.btnTestDown.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnTestDown, "Move Test one place down");
             this.btnTestDown.UseVisualStyleBackColor = false;
             this.btnTestDown.Click += new System.EventHandler(this.btnTestDown_Click);
             // 
@@ -266,15 +297,37 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Title:";
             // 
+            // lblPath
+            // 
+            this.lblPath.AutoSize = true;
+            this.lblPath.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPath.Location = new System.Drawing.Point(236, 40);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(40, 17);
+            this.lblPath.TabIndex = 4;
+            this.lblPath.Text = "Path :";
+            // 
+            // lblProjectPath
+            // 
+            this.lblProjectPath.AutoSize = true;
+            this.lblProjectPath.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblProjectPath.Location = new System.Drawing.Point(275, 42);
+            this.lblProjectPath.Name = "lblProjectPath";
+            this.lblProjectPath.Size = new System.Drawing.Size(40, 17);
+            this.lblProjectPath.TabIndex = 4;
+            this.lblProjectPath.Text = "Path :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1281, 695);
+            this.Controls.Add(this.lblProjectPath);
+            this.Controls.Add(this.lblPath);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.txtProjectFilename);
+            this.Controls.Add(this.txtProjectTitle);
             this.Controls.Add(this.btnSaveProject);
             this.Controls.Add(this.btnOpenProject);
             this.Controls.Add(this.btnNewProject);
@@ -296,7 +349,7 @@
         #endregion
         private System.Windows.Forms.Button btnNewProject;
         private System.Windows.Forms.Button btnOpenProject;
-        private System.Windows.Forms.TextBox txtProjectFilename;
+        private System.Windows.Forms.TextBox txtProjectTitle;
         private System.Windows.Forms.Button btnSaveProject;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel2;
@@ -309,6 +362,9 @@
         private System.Windows.Forms.Button btnNewTest;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lblPath;
+        private System.Windows.Forms.Label lblProjectPath;
+        private System.Windows.Forms.Button btnDuplicateTest;
     }
 }
 

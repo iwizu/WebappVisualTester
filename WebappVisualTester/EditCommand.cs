@@ -19,7 +19,7 @@ namespace WebappVisualTester
         ICommand command;
         Test test;
 
-        public EditCommand(Command command, Test test, EditTest parentForm,IProjectManager projectManager)
+        public EditCommand(ICommand command, Test test, EditTest parentForm,IProjectManager projectManager)
         {
             InitializeComponent();
             this.test = test;

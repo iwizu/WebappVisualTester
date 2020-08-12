@@ -26,7 +26,7 @@ namespace WebappVisualTester
         {
             if (projectManager.NewProject())
             {
-                txtProjectFilename.Text = projectManager.ProjectFilename;
+                lblProjectPath.Text = projectManager.ProjectFilename;
             }
         }
 
@@ -34,7 +34,9 @@ namespace WebappVisualTester
         {
             if (projectManager.LoadProject())
             {
-                txtProjectFilename.Text = projectManager.ProjectFilename;
+                lblProjectPath.Text = projectManager.ProjectFilename;
+                if (projectManager.Project != null)
+                    txtProjectTitle.Text = projectManager.Project.Title;
                 RefreshTests();
             }
         }
@@ -57,6 +59,7 @@ namespace WebappVisualTester
 
         private void btnSaveProject_Click(object sender, EventArgs e)
         {
+            projectManager.Project.Title = txtProjectTitle.Text;
             projectManager.SaveProject();
         }
 
@@ -144,6 +147,22 @@ namespace WebappVisualTester
             }
             projectManager.SaveProject();
             RefreshTests();
+        }
+
+        private void btnDuplicateTest_Click(object sender, EventArgs e)
+        {
+            if (dgrTests.SelectedRows.Count > 0)
+            {
+                var test = dgrTests.SelectedRows[0].DataBoundItem as Test;
+                if (test != null)
+                {
+                    var orderedProjects = projectManager.Project.Tests.OrderBy(i => i.OrderIndex).ToList();
+                    Test newTest = test.GetClone();
+                    newTest.OrderIndex= projectManager.Project.Tests.Count;
+                    projectManager.Project.Tests.Add(newTest);
+                    RefreshTests();
+                }
+            }
         }
     }
 }

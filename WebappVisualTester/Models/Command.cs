@@ -6,7 +6,7 @@ using System.Text;
 
 namespace WebappVisualTester.Models
 {
-    public class Command : ICommand
+    public abstract class Command : ICommand
     {
         public Command()
         {
@@ -15,7 +15,7 @@ namespace WebappVisualTester.Models
         public Guid Id { get; set; }
         public int OrderIndex { get; set; }
         public string Title { get; set; }
-        public int? BelongsToCommandIndex { get; set; }
+        public Guid? BelongsToCommandIndex { get; set; }
 
         public string _type => GetType().Name;
 public static JsonConverter StandardJsonConverter
@@ -27,5 +27,8 @@ public static JsonConverter StandardJsonConverter
                     .Build();
             }
         }
+
+        public abstract ICommand GetClone();
+        
     }
 }

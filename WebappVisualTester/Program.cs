@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using WebappVisualTester.Models;
 using Unity;
 using Unity.Lifetime;
+using WebappVisualTester.Packaging;
 
 namespace WebappVisualTester
 {
@@ -19,7 +20,8 @@ namespace WebappVisualTester
         {
             IUnityContainer UnityC;
             DependencyInjector.Register<IProjectManager, ProjectManager>();
-            //DependencyInjector.Register<ICommand, Command>();
+            DependencyInjector.Register<IPackageManager, PackageManager>();
+            DependencyInjector.Register<ICommand, NavigateToUrlCommand>();
 
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

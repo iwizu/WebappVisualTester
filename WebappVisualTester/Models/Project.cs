@@ -12,6 +12,7 @@ namespace WebappVisualTester.Models
             Tests = new List<Test>();
         }
         public Guid Id { get; set; }
+        public string Title { get; set; }
         public List<Test> Tests { get; set; }
         public string _type => GetType().Name;
     }

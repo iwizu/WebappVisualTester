@@ -6,14 +6,17 @@ using System.Text;
 using System.Windows.Forms;
 using WebappVisualTester.Converters;
 using WebappVisualTester.Models;
+using WebappVisualTester.Packaging;
 
 namespace WebappVisualTester
 {
     public class ProjectManager : IProjectManager
     {
-        public ProjectManager()
+        IPackageManager packageManager;
+        public ProjectManager(IPackageManager packageManager)
         {
             Project = new Project();
+            this.packageManager = packageManager;
         }
 
         public string ProjectFilename { get; set; }
@@ -33,17 +36,21 @@ namespace WebappVisualTester
                 }
             }
             var fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Json Files | *.json";
-            fileDialog.DefaultExt = "json";
+            fileDialog.Filter = "vtest Files | *.vtest";
+            fileDialog.DefaultExt = "vtest";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 ProjectFilename = fileDialog.FileName;
-                using (StreamReader file = File.OpenText(ProjectFilename))
+                var projectStr=packageManager.GetProjectFileInPackage(ProjectFilename);
+                /*
+                JsonSerializer serializer = new JsonSerializer();
+                this.Project = JsonConvert.DeserializeObject<Project>(projectStr, new CustomJsonConverter());
+                          */
+                this.Project = JsonConvert.DeserializeObject<Project>(projectStr, new JsonSerializerSettings
                 {
-                    JsonSerializer serializer = new JsonSerializer();                    
-                    //this.Project = (Project)serializer.Deserialize(file, typeof(Project));
-                    this.Project =JsonConvert.DeserializeObject<Project>(file.ReadToEnd(), new CustomJsonConverter());
-                }
+                    TypeNameHandling = TypeNameHandling.Objects
+                });
+
                 IsDirty = false;
             }
             else
@@ -63,8 +70,8 @@ namespace WebappVisualTester
                 }
             }
             var fileDialog = new SaveFileDialog();
-            fileDialog.Filter = "Json Files | *.json";
-            fileDialog.DefaultExt = "json";
+            fileDialog.Filter = "vtest Files | *.vtest";
+            fileDialog.DefaultExt = "vtest";
             if (fileDialog.ShowDialog()==DialogResult.OK)
             {
                 ProjectFilename = fileDialog.FileName;
@@ -82,12 +89,50 @@ namespace WebappVisualTester
         {
             IsDirty = false;
             if (!string.IsNullOrEmpty(ProjectFilename))
-            {            
+            {
+                var binder = new TypeNameSerializationBinder("ConsoleApplication.{0}, ConsoleApplication");
+                
+                /*var toserialize = new Project();
+                toserialize.Id = this.Project.Id;
+                toserialize.Title = this.Project.Title;
+
+                foreach(var test in this.Project.Tests)
+                {
+                    var t = new Test();
+                    t.Id = test.Id;
+                    t.OrderIndex = test.OrderIndex;
+                    t.Title = test.Title;
+                    foreach (var test in this.Project.Tests)
+                    {
+                        t.Commands
+                    }
+                }
+                toserialize.Commands.Add(
+            new ClickButtonCommand()
+            {
+                _type = "Some1"
+            });
+                toserialize.CollectionToSerialize.Add(
+                    new FillTextboxCommand()
+                    {
+                        Something2 = "Some2"
+                    });
+                */
+                string jsonData = JsonConvert.SerializeObject(this.Project, Formatting.Indented,
+                    new JsonSerializerSettings
+                    {
+                        //TypeNameHandling = TypeNameHandling.Auto,
+                        //Binder = binder
+                        TypeNameHandling = TypeNameHandling.Objects,
+                        TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+                    });
+                
+                /*
                 string jsonData = JsonConvert.SerializeObject(this.Project, Formatting.None, new JsonSerializerSettings()
                 {
                     TypeNameHandling = TypeNameHandling.Auto
-                });
-                File.WriteAllText(ProjectFilename, jsonData);
+                });*/
+                packageManager.CreatePackageWithProjectFile(ProjectFilename, jsonData);
             }
         }
     }

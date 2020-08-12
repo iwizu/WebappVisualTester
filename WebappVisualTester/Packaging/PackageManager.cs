@@ -1,4 +1,5 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +21,7 @@ namespace WebappVisualTester.Packaging
             using (var fs = File.Create(filename))
             using (var outStream = new ZipOutputStream(fs))
             {
-                outStream.PutNextEntry(new ZipEntry(Path.GetFileNameWithoutExtension(filename) + ".json"));
+                outStream.PutNextEntry(new ZipEntry("project.json"));
 
                 using (var sw = new StreamWriter(outStream))
                 {
@@ -39,6 +40,24 @@ namespace WebappVisualTester.Packaging
                 using (var sw = new StreamWriter(outStream))
                 {
                     //sw.Write(projectJson);
+                }
+            }
+        }
+        public string GetProjectFileInPackage(string filename)
+        {
+            using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            {
+                using (var zf = new ZipFile(fs))
+                {
+                    var ze = zf.GetEntry("project.json");
+                    if (ze == null)
+                    {
+                        throw new ArgumentException("project.json", "not found in Zip");
+                    }
+
+                    StreamReader reader = new StreamReader(zf.GetInputStream(ze));
+                    string contents = reader.ReadToEnd();
+                    return contents;
                 }
             }
         }

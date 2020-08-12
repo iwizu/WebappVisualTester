@@ -41,10 +41,11 @@ namespace WebappVisualTester
         }
         private void RefreshCommands()
         {
-           var cmds= test.commands.Where(i => i._type.Contains(nameof(IfContainsStringCommand))).OrderBy(i => i.OrderIndex).Select(i=>new { Index=i.OrderIndex,Title= i.OrderIndex+":"+i.Title }).ToList();
+           var cmds= test.Commands.Where(i => i._type.Contains(nameof(IfContainsStringCommand))).OrderBy(i => i.OrderIndex)
+                .Select(i=>new { Id=i.Id,Title= i.OrderIndex+":"+i.Title }).ToList();
             comboBox1.DataSource = cmds;
             comboBox1.DisplayMember = "Title";
-            comboBox1.ValueMember = "Index";
+            comboBox1.ValueMember = "Id";
             comboBox1.SelectedIndex = -1;
         }
         private void Save()
@@ -55,28 +56,28 @@ namespace WebappVisualTester
                 {
                     command = new FillTextboxCommand();
                     command.Title = mainCommandForm.GetTitle();
-                    command.Id = txtId.Text;
+                    command.ElementId = txtId.Text;
                     command.Class = txtClass.Text;
                     command.Text = txtText.Text;
-                    int? belongToIndex = comboBox1.SelectedValue as int?;
+                    Guid? belongToIndex = comboBox1.SelectedValue as Guid?;
                     if (belongToIndex.HasValue)
                         command.BelongsToCommandIndex = belongToIndex;
                     else
                         command.BelongsToCommandIndex = null;
                     command.OrderIndex = 1;
-                    if (test.commands.Any())
+                    if (test.Commands.Any())
                     {
-                        command.OrderIndex = test.commands.Max(i => i.OrderIndex) + 1;
+                        command.OrderIndex = test.Commands.Max(i => i.OrderIndex) + 1;
                     }
-                    test.commands.Add(command);
+                    test.Commands.Add(command);
                 }
                 else
                 {
                     command.Title = mainCommandForm.GetTitle();
-                    command.Id = txtId.Text;
+                    command.ElementId = txtId.Text;
                     command.Class = txtClass.Text;
-                    command.Text = txtText.Text;                    
-                    int? belongToIndex = comboBox1.SelectedValue as int?;
+                    command.Text = txtText.Text;
+                    Guid? belongToIndex = comboBox1.SelectedValue as Guid?;
                     if (belongToIndex.HasValue)
                         command.BelongsToCommandIndex = belongToIndex;
                     else
@@ -91,7 +92,7 @@ namespace WebappVisualTester
             RefreshCommands();
             if (command!=null && command.OrderIndex>0)
             {
-                txtId.Text= command.Id;
+                txtId.Text= command.ElementId;
                 txtClass.Text = command.Class;
                 txtText.Text = command.Text;
                 if (command.BelongsToCommandIndex.HasValue)
