@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>WebappVisualTester</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="1.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="83.0.0" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha05" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="85.0.4183.3800-beta" />
+    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+    <PackageReference Include="Unity" Version="5.11.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CommandUserControls\IfContainsStringCommandUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CommandUserControls\FillTextboxCommandUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CommandUserControls\ClickButtonCommandUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CommandUserControls\TakeScreenshotCommandUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CommandUserControls\NavigateToUrlCommandUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="EditTest.cs" />
+    <Compile Update="EditCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %282%29 - Copy %282%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy (2).resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %282%29 - Copy - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy (2) - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %282%29 - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy (2).resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %282%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %283%29 - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy (3).resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %283%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy %284%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy %282%29 - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy - Copy (2).resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy %282%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy %283%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy - Copy %282%29.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy - Copy - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy - Copy - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommandUserControls\NavigateToUrlCommandUC - Copy.resx">
+      <DependentUpon>NavigateToUrlCommandUC.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditTest - Copy %282%29.resx">
+      <DependentUpon>EditTest.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditTest - Copy - Copy.resx">
+      <DependentUpon>EditTest - Copy.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditTest - Copy.resx">
+      <DependentUpon>EditTest.resx</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
