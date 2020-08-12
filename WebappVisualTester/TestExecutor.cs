@@ -13,7 +13,6 @@ namespace WebappVisualTester
 {
     public class TestExecutor : IDisposable
     {
-        //private readonly IWebDriver _driver;
         IProjectManager projectManager;
         List<IWebDriver> drivers;
         Test test;
@@ -34,8 +33,10 @@ namespace WebappVisualTester
             }
             if (test!=null)
             {
-                if(cmds==null)
-                cmds= test.commands.Where(i=>!i.BelongsToCommandIndex.HasValue).OrderBy(i => i.OrderIndex).ToList();
+                if (cmds == null)
+                {
+                    cmds = test.commands.Where(i => !i.BelongsToCommandIndex.HasValue).OrderBy(i => i.OrderIndex).ToList();
+                }
                 foreach(var cmd in cmds)
                 {
                     if (cmd._type.Contains(nameof(NavigateToUrlCommand)))
