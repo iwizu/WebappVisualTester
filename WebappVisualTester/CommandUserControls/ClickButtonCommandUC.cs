@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
 
@@ -14,7 +9,7 @@ namespace WebappVisualTester
     public partial class ClickButtonCommandUC : UserControl
     {
         IProjectManager projectManager;
-        public ClickButtonCommand command;
+        ClickButtonCommand command;
         Test test;
         EditTest parentForm;
         EditCommand mainCommandForm;

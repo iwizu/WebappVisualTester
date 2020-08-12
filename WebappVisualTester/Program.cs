@@ -1,11 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
-using Unity;
-using Unity.Lifetime;
 using WebappVisualTester.Packaging;
 
 namespace WebappVisualTester
@@ -18,7 +13,6 @@ namespace WebappVisualTester
         [STAThread]
         static void Main()
         {
-            IUnityContainer UnityC;
             DependencyInjector.Register<IProjectManager, ProjectManager>();
             DependencyInjector.Register<IPackageManager, PackageManager>();
             DependencyInjector.Register<ICommand, NavigateToUrlCommand>();

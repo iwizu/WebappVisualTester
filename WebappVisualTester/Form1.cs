@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
-using Unity;
 
 namespace WebappVisualTester
 {
@@ -62,11 +56,6 @@ namespace WebappVisualTester
         {
             projectManager.Project.Title = txtProjectTitle.Text;
             projectManager.SaveProject();
-        }
-
-        private void lnkNewTest_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            
         }
 
         private void dgrTests_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -157,7 +146,6 @@ namespace WebappVisualTester
                 var test = dgrTests.SelectedRows[0].DataBoundItem as Test;
                 if (test != null)
                 {
-                    var orderedProjects = projectManager.Project.Tests.OrderBy(i => i.OrderIndex).ToList();
                     Test newTest = test.GetClone();
                     newTest.OrderIndex= projectManager.Project.Tests.Count;
                     projectManager.Project.Tests.Add(newTest);

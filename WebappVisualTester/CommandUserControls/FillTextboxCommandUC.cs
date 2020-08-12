@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
 
@@ -14,7 +9,7 @@ namespace WebappVisualTester
     public partial class FillTextboxCommandUC : UserControl
     {
         IProjectManager projectManager;
-        public FillTextboxCommand command;
+        FillTextboxCommand command;
         Test test;
         EditTest parentForm;
         EditCommand mainCommandForm;

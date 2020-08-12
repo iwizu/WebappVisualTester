@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
 
@@ -34,7 +29,7 @@ namespace WebappVisualTester
             if (test != null)
             {
                 txtTitle.Text = test.Title;
-                if (test.Commands != null & test.Commands.Any())
+                if (test.Commands != null && test.Commands.Any())
                 {
                     var ds= test.Commands
                           .OrderBy(i => i.OrderIndex)

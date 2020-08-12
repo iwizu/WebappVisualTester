@@ -13,9 +13,9 @@ namespace WebappVisualTester
 {
     public class TestExecutor : IDisposable
     {
-        IProjectManager projectManager;
-        List<IWebDriver> drivers;
-        Test test;
+        readonly IProjectManager projectManager;
+        readonly List<IWebDriver> drivers;
+        readonly Test test;
         public TestExecutor(Test test, IProjectManager projectManager)
         {
             drivers = new List<IWebDriver>();
@@ -59,16 +59,13 @@ namespace WebappVisualTester
                     else if (cmd._type.Contains(nameof(IfContainsStringCommand)))
                     {
                         var d = cmd as IfContainsStringCommand;
-                        if (d != null)
+                        if (d != null && driver.PageSource.Contains(d.IfContainsString))
                         {
-                            if (driver.PageSource.Contains(d.IfContainsString))
-                            {
-                                var subCommands = test.Commands.Where(i => i.BelongsToCommandIndex.HasValue
-                                    && i.BelongsToCommandIndex.Equals(d.OrderIndex))
-                                    .OrderBy(i => i.OrderIndex).ToList();
-                               s.AppendLine(Start(subCommands,driver));
-                            }
-                        }
+                            var subCommands = test.Commands.Where(i => i.BelongsToCommandIndex.HasValue
+                                && i.BelongsToCommandIndex.Equals(d.OrderIndex))
+                                .OrderBy(i => i.OrderIndex).ToList();
+                            s.AppendLine(Start(subCommands, driver));
+                        }                        
                     }
                     else if (cmd._type.Contains(nameof(FillTextboxCommand)))
                     {
@@ -130,12 +127,8 @@ namespace WebappVisualTester
                                 }
                                 else if (d.ButtonType.Equals("input type:submit"))
                                 {
-                                    var btn1=FindElement(driver, By.ClassName("dx-button-content"), 10);
+                                    var btn=FindElement(driver, By.XPath("//input[@type='submit']"), 10);
                                    
-
-                                    new WebDriverWait(driver, TimeSpan.FromSeconds(7)).Until(ExpectedConditions.ElementExists((
-                                            By.XPath("//input[@type='submit']"))));
-                                       var btn = driver.FindElement(By.XPath("//input[@type='submit']"));
                                     if (btn != null)
                                     {                                        
                                         Actions actions = new Actions(driver);

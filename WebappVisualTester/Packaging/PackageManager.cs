@@ -1,9 +1,6 @@
-﻿using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
+﻿using ICSharpCode.SharpZipLib.Zip;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace WebappVisualTester.Packaging
 {
@@ -11,9 +8,7 @@ namespace WebappVisualTester.Packaging
     {
         public void CreatePackageFile(string filename)
         {
-            using (var fs = File.Create(filename))
-            {
-            }
+            File.Create(filename);
         }
 
         public void CreatePackageWithProjectFile(string filename, string projectJson)
@@ -36,11 +31,12 @@ namespace WebappVisualTester.Packaging
             using (var outStream = new ZipOutputStream(fs))
             {
                 outStream.PutNextEntry(new ZipEntry(Path.GetFileNameWithoutExtension(filename) + ".json"));
-
+                /*
                 using (var sw = new StreamWriter(outStream))
                 {
                     //sw.Write(projectJson);
                 }
+                */
             }
         }
         public string GetProjectFileInPackage(string filename)

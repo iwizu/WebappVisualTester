@@ -5,9 +5,19 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>WebappVisualTester</AssemblyName>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CefSharp.WinForms" Version="84.3.10-pre" />
     <PackageReference Include="JsonSubTypes" Version="1.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Selenium.Chrome.WebDriver" Version="83.0.0" />
@@ -19,25 +29,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CommandUserControls\IfContainsStringCommandUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="CommandUserControls\FillTextboxCommandUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="CommandUserControls\ClickButtonCommandUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="CommandUserControls\TakeScreenshotCommandUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="CommandUserControls\NavigateToUrlCommandUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="CommandUserControls\IfContainsStringCommandUC.cs" />
+    <Compile Update="CommandUserControls\FillTextboxCommandUC.cs" />
+    <Compile Update="CommandUserControls\ClickButtonCommandUC.cs" />
+    <Compile Update="CommandUserControls\TakeScreenshotCommandUC.cs" />
+    <Compile Update="CommandUserControls\NavigateToUrlCommandUC.cs" />
     <Compile Update="EditTest.cs" />
-    <Compile Update="EditCommand.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="EditCommand.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,14 +1,12 @@
 ﻿using JsonSubTypes;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WebappVisualTester.Models
 {
     public abstract class Command : ICommand
     {
-        public Command()
+        protected Command()
         {
             Id = Guid.NewGuid();
         }

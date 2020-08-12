@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
-using Unity;
 
 namespace WebappVisualTester
 {
@@ -110,7 +102,6 @@ namespace WebappVisualTester
             if(command!=null&&command.OrderIndex>0)
             {
                 txtTitle.Text = command.Title;
-                var d = command as NavigateToUrlCommand;
                 if (command.GetType().Equals(typeof(NavigateToUrlCommand)))
                 {
                     cmbCommandType.Text = "Navigate to URL";
