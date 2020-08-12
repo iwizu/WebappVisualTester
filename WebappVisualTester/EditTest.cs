@@ -42,7 +42,7 @@ namespace WebappVisualTester
                     dgrCommands.DataSource=ds;
                     dgrCommands.Columns["OrderIndex"].Visible = false;
                     dgrCommands.Columns["_type"].Visible = false;
-
+                    dgrCommands.Columns["Id"].Visible = false;
                 }
             }
         }

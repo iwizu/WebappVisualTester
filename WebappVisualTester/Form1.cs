@@ -46,10 +46,11 @@ namespace WebappVisualTester
             if (projectManager.Project.Tests!=null&& projectManager.Project.Tests.Any())
             {
                 dgrTests.DataSource = projectManager.Project.Tests
-                     .OrderBy(i => i.OrderIndex)                     
+                     .OrderBy(i => i.OrderIndex)
                      .ToList();
                 dgrTests.Columns["OrderIndex"].Visible = false;
                 dgrTests.Columns["_type"].Visible = false;
+                dgrTests.Columns["Id"].Visible = false;
             }
             else
             {
