@@ -1,12 +1,14 @@
-﻿namespace WebappVisualTester.Models
+﻿using System.Threading.Tasks;
+
+namespace WebappVisualTester.Models
 {
     public interface IProjectManager
     {
-        public string ProjectFilename { get; set; }
-        public Project Project { get; set; }
-        public bool NewProject();
-        public bool LoadProject();
-        public void SaveProject();
+        string ProjectFilename { get; set; }
+        Project Project { get; set; }
+        bool NewProject();
+        bool LoadProject();
+        Task SaveProject();
 
     }
 }

@@ -1,0 +1,87 @@
+﻿<div id="openseadragon1" style="width: 1200px; height: 800px;"></div>
+<script src="openseadragon.min.js"></script>
+<script src="openseadragon-svg-overlay.js"></script>
+<script src="//d3js.org/d3.v5.min.js"></script>
+<script type="text/javascript">
+    var rowsNum = __ROWSNUM__;
+    var tileWidth = __TILEWIDTH__;
+    var marginBetweenTiles = __MARGINBETWEENTILES__;
+
+    var viewer = OpenSeadragon({
+        id: "openseadragon1",
+        prefixUrl: "/openseadragon/images/",
+        collectionMode: true,
+        collectionRows: rowsNum,
+        collectionTileSize: tileWidth,
+        collectionTileMargin: marginBetweenTiles,
+        tileSources:
+            [
+                __TILESOURCES__
+            ]
+    });
+
+    var href = window.location.href;
+    let url = window.location.href;
+    var dir = href.substring(0, href.lastIndexOf('/')) + "/";
+    var images = document.getElementsByTagName('img');
+
+    for (var i = 0; i < images.length; i++) {
+        let filename = images[i].src.split('/').pop().split('?')[0];
+        images[i].src = dir + "openseadragon/images/" + filename;
+    }
+
+    var columns = calcColumns();
+    var overlay = this.viewer.svgOverlay();
+
+    var totalSize = rowsNum * columns;
+
+    for (i = 0; i < viewer.tileSources.length; i++) {
+	var TITLES
+        var data = __DATA__;
+
+        var x = parseInt(i / columns);
+        var y = parseInt(i % columns);
+
+        var posx = x * tileWidth + x * marginBetweenTiles;
+        var posy = y * tileWidth + y * marginBetweenTiles;
+
+
+        var g = d3.select(overlay.node()).append("g");
+
+        var gWithRect = g
+            .append("rect")
+            .style("stroke-width", 5)
+            .style("stroke", "rgb(221,221,221)")
+            .style("fill", "rgb(238,238,238)")
+            .attr("width", tileWidth)
+            .attr("height", marginBetweenTiles-12)
+            .attr("y", posx)
+            .attr("x", posy)
+            .attr("class", "outrect");
+
+        var text = g
+            .append("text")
+            .text(data[i].title)
+            .attr("fill", "rgb(114,114,114)")
+            .style("font-size", "34px")
+            .attr("y", posx + 35)
+            .attr("x", posy + 20);
+
+        text.selectAll("tspan.text")
+            .data(data[i].details.split("\n"))
+            .enter()
+            .append("tspan")
+            .attr("class", "text")
+            .text(d => d)
+            .attr("x", posy+20)
+            .attr("dy", 30);
+
+    };
+
+    function calcColumns() {
+        var totalTiles = viewer.tileSources.length;
+        var tilesPerRow = Math.ceil(totalTiles / rowsNum);
+        return tilesPerRow;
+    }
+
+</script>

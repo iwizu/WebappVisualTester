@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
 using WebappVisualTester.Packaging;
@@ -28,25 +30,30 @@ namespace WebappVisualTester
             {
                 SaveProject();
             }
-            
-            var fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "vtest Files | *.vtest";
-            fileDialog.DefaultExt = "vtest";
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                ProjectFilename = fileDialog.FileName;
-                var projectStr=packageManager.GetProjectFileInPackage(ProjectFilename);
 
-                this.Project = JsonConvert.DeserializeObject<Project>(projectStr, new JsonSerializerSettings
+            bool loadProject = CheckIfPreviousProjectDirectoryWillBeClosed();
+
+            if (loadProject)
+            {
+                var fileDialog = new OpenFileDialog();
+                fileDialog.Filter = "vtest Files | *.vtest";
+                fileDialog.DefaultExt = "vtest";
+                if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    TypeNameHandling = TypeNameHandling.Objects
-                });
+                    ProjectFilename = fileDialog.FileName;
+                    string projectStr=packageManager.GetProjectFileInPackage(ProjectFilename);
+                    this.Project = JsonConvert.DeserializeObject<Project>(projectStr, new JsonSerializerSettings
+                    {
+                        TypeNameHandling = TypeNameHandling.Objects
+                    });
+                    packageManager.UnpackProject(ProjectFilename);
 
-                IsDirty = false;
-            }
-            else
-            {
-                return false;
+                    IsDirty = false;
+                }
+                else
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -57,24 +64,58 @@ namespace WebappVisualTester
             {
                 SaveProject();
             }
-            
-            var fileDialog = new SaveFileDialog();
-            fileDialog.Filter = "vtest Files | *.vtest";
-            fileDialog.DefaultExt = "vtest";
-            if (fileDialog.ShowDialog()==DialogResult.OK)
+
+            bool createNewProject = CheckIfPreviousProjectDirectoryWillBeClosed();     
+
+            if (createNewProject)
             {
-                ProjectFilename = fileDialog.FileName;
-                Project = new Project();
-                IsDirty = false;
-            }
-            else
-            {
-                return false;
+                var fileDialog = new SaveFileDialog();
+                fileDialog.Filter = "vtest Files | *.vtest";
+                fileDialog.DefaultExt = "vtest";
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ProjectFilename = fileDialog.FileName;
+                    Project = new Project();
+                    IsDirty = false;
+                }
+                else
+                {
+                    return false;
+                }
             }
             return true;
         }
 
-        public void SaveProject()
+        private bool CheckIfPreviousProjectDirectoryWillBeClosed()
+        {
+            var projectsPath = Global.GetProjectsPath();
+            var previousProjectPath = projectsPath + @"\\" + this.Project.Id;
+            if (Directory.Exists(previousProjectPath))
+            {
+                if (MessageBox.Show("Do you want to close the previous project?", "Close previous project?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    CloseProject();
+                }
+                else
+                {
+                  return false;
+                }
+            }
+            return true;
+        }
+
+        public void CloseProject()
+        {
+            var projectsPath = Global.GetProjectsPath();
+            var projectPath = projectsPath + @"\\" + this.Project.Id;
+            if (Directory.Exists(projectPath))
+            {
+                packageManager.PackProject();
+            }
+            Directory.Delete(projectPath);
+        }
+
+        public async Task SaveProject()
         {
             IsDirty = false;
             if (!string.IsNullOrEmpty(ProjectFilename))
@@ -85,7 +126,7 @@ namespace WebappVisualTester
                         TypeNameHandling = TypeNameHandling.Objects,
                         TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
                     });
-                packageManager.CreatePackageWithProjectFile(ProjectFilename, jsonData);
+                await packageManager.PackProject();
             }
         }
     }
