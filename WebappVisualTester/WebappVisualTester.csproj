@@ -5,19 +5,42 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>WebappVisualTester</AssemblyName>
-    <Platforms>AnyCPU;x86</Platforms>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>x86</PlatformTarget>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.WinForms" Version="84.3.10-pre" />
+    <Reference Include="DeepZoomTools">
+      <HintPath>DeepZoomTools.DLL</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>true</Private>
+      <!-- You may set it to true if your dll has a specific version -->
+    </Reference>
+    <Reference Include="System.Data.Entity.Design">
+      <HintPath>..\..\..\..\..\..\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\System.Data.Entity.Design.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="CefSharp.OffScreen" Version="83.4.20" />
+    <PackageReference Include="CefSharp.WinForms" Version="83.4.20" />
+    <PackageReference Include="DeepZoomTools.dll" Version="1.0.0.18340" />
     <PackageReference Include="JsonSubTypes" Version="1.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Selenium.Chrome.WebDriver" Version="83.0.0" />
@@ -93,6 +116,18 @@
     <EmbeddedResource Update="EditTest - Copy.resx">
       <DependentUpon>EditTest.resx</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Update="CefSharp">
+      <Private>true</Private>
+    </Reference>
+    <Reference Update="CefSharp.Core">
+      <Private>true</Private>
+    </Reference>
+    <Reference Update="CefSharp.WinForms">
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

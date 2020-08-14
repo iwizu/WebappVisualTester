@@ -17,7 +17,6 @@ namespace WebappVisualTester.Converters
         {
             JObject jo = JObject.Load(reader);
 
-
             string type = (string)jo["_type"];
 
             if (type == typeof(Project).Name)

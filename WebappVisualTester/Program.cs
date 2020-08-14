@@ -1,3 +1,5 @@
+using CefSharp;
+using CefSharp.WinForms;
 using System;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
@@ -13,6 +15,10 @@ namespace WebappVisualTester
         [STAThread]
         static void Main()
         {
+            CefSettings settings = new CefSettings();
+            // Initialize cef with the provided settings
+            Cef.Initialize(settings);
+
             DependencyInjector.Register<IProjectManager, ProjectManager>();
             DependencyInjector.Register<IPackageManager, PackageManager>();
             DependencyInjector.Register<ICommand, NavigateToUrlCommand>();

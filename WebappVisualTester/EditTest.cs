@@ -71,11 +71,6 @@ namespace WebappVisualTester
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Save();
-            if(parentForm!=null)
-            {
-                parentForm.RefreshTests();
-            }
 
         }
         private void Save()
@@ -164,6 +159,13 @@ namespace WebappVisualTester
             var executor=DependencyInjector.Resolve<TestExecutor>(new { test = test });
            string res= executor.Start(null,null);
             richTextBox1.Text = res;
+        }
+
+        private void btnVisualNavigation_Click(object sender, EventArgs e)
+        {
+            VisualNavigationForm visNavForm = new VisualNavigationForm();
+            //var visNavForm = DependencyInjector.Retrieve<VisualNavigationForm>();
+            visNavForm.ShowDialog();
         }
     }
 }
