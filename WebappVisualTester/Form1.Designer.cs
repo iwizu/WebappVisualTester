@@ -166,7 +166,7 @@
             this.dgrTests.TabIndex = 0;
             this.dgrTests.Text = "dataGridView1";
             this.toolTip1.SetToolTip(this.dgrTests, "Double click to edit Test");
-            this.dgrTests.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrTests_CellContentDoubleClick);
+            this.dgrTests.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrTests_CellDoubleClick);
             // 
             // panel1
             // 
@@ -301,7 +301,7 @@
             // 
             this.lblPath.AutoSize = true;
             this.lblPath.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPath.Location = new System.Drawing.Point(236, 40);
+            this.lblPath.Location = new System.Drawing.Point(236, 41);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(40, 17);
             this.lblPath.TabIndex = 4;
@@ -313,9 +313,9 @@
             this.lblProjectPath.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblProjectPath.Location = new System.Drawing.Point(275, 42);
             this.lblProjectPath.Name = "lblProjectPath";
-            this.lblProjectPath.Size = new System.Drawing.Size(40, 17);
+            this.lblProjectPath.Size = new System.Drawing.Size(13, 17);
             this.lblProjectPath.TabIndex = 4;
-            this.lblProjectPath.Text = "Path :";
+            this.lblProjectPath.Text = "-";
             // 
             // Form1
             // 

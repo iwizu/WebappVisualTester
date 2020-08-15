@@ -9,6 +9,7 @@ namespace WebappVisualTester.Models
         bool NewProject();
         bool LoadProject();
         Task SaveProject();
+        void CreateTestFolder(Test test);
 
     }
 }

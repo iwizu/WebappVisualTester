@@ -18,6 +18,7 @@ namespace WebappVisualTester
                 {
                     Directory.CreateDirectory(projectsPath);
                 }
+                return projectsPath;
             }
             catch { }
             return "";
@@ -31,7 +32,7 @@ namespace WebappVisualTester
                 {
                     foreach (var dir in directories)
                     {
-                        Directory.Delete(dir);
+                        Directory.Delete(dir,true);
                     }
                 }            
         }

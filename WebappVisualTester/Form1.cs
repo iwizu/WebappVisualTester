@@ -58,21 +58,6 @@ namespace WebappVisualTester
             projectManager.SaveProject();
         }
 
-        private void dgrTests_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgrTests.SelectedRows.Count > 0)
-            {
-                var test=dgrTests.SelectedRows[0].DataBoundItem as Test;
-                if (test != null)
-                {
-                    var et = DependencyInjector.Resolve<EditTest>(new { test = test });
-                    splitContainer1.Panel2.Controls.Clear();
-                    splitContainer1.Panel2.Controls.Add(et);
-                    et.Dock = DockStyle.Fill;
-                }
-            }
-        }
-
         private void btnTestUp_Click(object sender, EventArgs e)
         {
             if(dgrTests.SelectedRows.Count>0)
@@ -150,6 +135,21 @@ namespace WebappVisualTester
                     newTest.OrderIndex= projectManager.Project.Tests.Count;
                     projectManager.Project.Tests.Add(newTest);
                     RefreshTests();
+                }
+            }
+        }
+
+        private void dgrTests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgrTests.SelectedRows.Count > 0)
+            {
+                var test = dgrTests.SelectedRows[0].DataBoundItem as Test;
+                if (test != null)
+                {
+                    var et = DependencyInjector.Resolve<EditTest>(new { test = test });
+                    splitContainer1.Panel2.Controls.Clear();
+                    splitContainer1.Panel2.Controls.Add(et);
+                    et.Dock = DockStyle.Fill;
                 }
             }
         }

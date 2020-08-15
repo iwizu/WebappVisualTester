@@ -122,10 +122,10 @@
     <None Update="VisualNavigation\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="VisualNavigation\openseadragon-svg-overlay.js">
+    <None Update="VisualNavigation\openseadragon\openseadragon-svg-overlay.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="VisualNavigation\openseadragon.min.js">
+    <None Update="VisualNavigation\openseadragon\openseadragon.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="VisualNavigation\openseadragon\images\button_grouphover.png">

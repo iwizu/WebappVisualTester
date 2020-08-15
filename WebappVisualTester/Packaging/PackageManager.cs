@@ -8,11 +8,8 @@ namespace WebappVisualTester.Packaging
 {
     public class PackageManager : IPackageManager
     {
-        readonly IProjectManager projectManager;
-
-        public PackageManager(IProjectManager projectManager)
+        public PackageManager()
         {
-            this.projectManager = projectManager;
         }
         
         public void CreatePackageFile(string filename)
@@ -67,25 +64,25 @@ namespace WebappVisualTester.Packaging
             }
         }
 
-        public async Task<bool> PackProject()
+        public async Task<bool> PackProject(Guid projectId,string projectFilename)
         {
             return await Task.Run(() =>
             {
                 bool result = true;
-                var projectDirectory = Global.GetProjectsPath() + "\\" + projectManager.Project.Id;
+                var projectDirectory = Global.GetProjectsPath() + "\\" + projectId;
                 if (Directory.Exists(projectDirectory))
                 {
-                    ZipProjectDirectory(projectDirectory, projectManager.ProjectFilename);
+                    ZipProjectDirectory(projectDirectory, projectFilename);
                 }
                 return result;
             });    
         }
 
         //https://stackoverflow.com/a/22444096
-        public bool UnpackProject(string projectFilename)
+        public bool UnpackProject(Guid projectId, string projectFilename)
         {
             bool result = true;
-            var projectDirectory = Global.GetProjectsPath() + "\\" + projectManager.Project.Id;
+            var projectDirectory = Global.GetProjectsPath() + "\\" + projectId;
             if (!Directory.Exists(projectDirectory))
             {
                 Directory.CreateDirectory(projectDirectory);

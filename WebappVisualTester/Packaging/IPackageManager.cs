@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace WebappVisualTester.Packaging
 {
@@ -10,8 +11,8 @@ namespace WebappVisualTester.Packaging
 
         string GetProjectFileInPackage(string filename);
 
-        Task<bool> PackProject();
+        Task<bool> PackProject(Guid projectId, string projectFilename);
 
-        bool UnpackProject(string projectFilename);
+        bool UnpackProject(Guid projectId, string projectFilename);
     }
 }

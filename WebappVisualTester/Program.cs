@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using Unity;
 using WebappVisualTester.Models;
 using WebappVisualTester.Packaging;
 
@@ -42,6 +43,10 @@ namespace WebappVisualTester
                         Global.DontCloseOtherInstances = true;
                     }
                 }
+                else
+                {
+                    Global.DeleteTempProjectDirectories();
+                }
             }
             catch { }
             
@@ -52,6 +57,8 @@ namespace WebappVisualTester
             DependencyInjector.Register<IProjectManager, ProjectManager>();
             DependencyInjector.Register<IPackageManager, PackageManager>();
             DependencyInjector.Register<ICommand, NavigateToUrlCommand>();
+            DependencyInjector.UnityContainer.RegisterType<DeepZoomManager>();
+
 
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

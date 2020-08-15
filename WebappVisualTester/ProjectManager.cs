@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
@@ -10,8 +11,8 @@ namespace WebappVisualTester
 {
     public class ProjectManager : IProjectManager
     {
-        readonly IPackageManager packageManager;
-        public ProjectManager(IPackageManager packageManager)
+        PackageManager packageManager;
+        public ProjectManager(PackageManager packageManager)
         {
             Project = new Project();
             this.packageManager = packageManager;
@@ -46,7 +47,7 @@ namespace WebappVisualTester
                     {
                         TypeNameHandling = TypeNameHandling.Objects
                     });
-                    packageManager.UnpackProject(ProjectFilename);
+                    packageManager.UnpackProject(this.Project.Id,ProjectFilename);
 
                     IsDirty = false;
                 }
@@ -77,6 +78,23 @@ namespace WebappVisualTester
                     ProjectFilename = fileDialog.FileName;
                     Project = new Project();
                     IsDirty = false;
+
+                    var projectsPath = Global.GetProjectsPath();
+                    var projectPath = projectsPath + @"\\" + this.Project.Id;
+                    if (!Directory.Exists(projectPath))
+                    {
+                        Directory.CreateDirectory(projectPath);
+                        string projectJsonFilePath = projectPath + "\\project.json";
+                        File.WriteAllText(projectJsonFilePath, "");
+                        Directory.CreateDirectory(projectPath + "\\Tests");
+                        Directory.CreateDirectory(projectPath + "\\openseadragon");
+                        string openseadragonFolder = projectPath + "\\Openseadragon";                        
+                        string currentPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                        string visualNavigationFolder = currentPath + "\\VisualNavigation";
+                        string openseadragonPath = visualNavigationFolder+"\\openseadragon";
+                        Copy(openseadragonPath, projectPath + "\\openseadragon");                        
+                    }
+                    
                 }
                 else
                 {
@@ -84,6 +102,33 @@ namespace WebappVisualTester
                 }
             }
             return true;
+        }
+        public static void Copy(string sourceDirectory, string targetDirectory)
+        {
+            var diSource = new DirectoryInfo(sourceDirectory);
+            var diTarget = new DirectoryInfo(targetDirectory);
+
+            CopyAll(diSource, diTarget);
+        }
+
+        public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+
+            // Copy each file into the new directory.
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+            }
+
+            // Copy each subdirectory using recursion.
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir);
+            }
         }
 
         private bool CheckIfPreviousProjectDirectoryWillBeClosed()
@@ -110,9 +155,20 @@ namespace WebappVisualTester
             var projectPath = projectsPath + @"\\" + this.Project.Id;
             if (Directory.Exists(projectPath))
             {
-                packageManager.PackProject();
+                packageManager.PackProject(this.Project.Id,this.ProjectFilename);
             }
-            Directory.Delete(projectPath);
+            Directory.Delete(projectPath,true);
+        }
+
+        public void CreateTestFolder(Test test)
+        {
+            var projectFolder = Global.GetProjectsPath() + "\\" + this.Project.Id;
+            var testsFolder = projectFolder + "\\Tests";
+            if(!Directory.Exists(testsFolder+"\\"+test.Id))
+            {
+                Directory.CreateDirectory(testsFolder + "\\" + test.Id+"\\Images");
+                Directory.CreateDirectory(testsFolder + "\\" + test.Id + "\\dzi");
+            }
         }
 
         public async Task SaveProject()
@@ -126,7 +182,9 @@ namespace WebappVisualTester
                         TypeNameHandling = TypeNameHandling.Objects,
                         TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
                     });
-                await packageManager.PackProject();
+                string projectJsonPath = Global.GetProjectsPath()+"\\"+this.Project.Id+"\\project.json";
+                await File.WriteAllTextAsync(projectJsonPath, jsonData);
+                await packageManager.PackProject(this.Project.Id,ProjectFilename);
             }
         }
     }

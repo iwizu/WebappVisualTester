@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WebappVisualTester.Models;
@@ -71,7 +72,11 @@ namespace WebappVisualTester
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            Save();
+            if (parentForm != null)
+            {
+                parentForm.RefreshTests();
+            }
         }
         private void Save()
         {
@@ -85,6 +90,7 @@ namespace WebappVisualTester
                     test.OrderIndex = projectManager.Project.Tests.Max(i => i.OrderIndex) + 1;
                 }
                 projectManager.Project.Tests.Add(test);
+                projectManager.CreateTestFolder(test);
             }
             else
             {
@@ -95,6 +101,8 @@ namespace WebappVisualTester
 
         private void btnCreateCommand_Click(object sender, EventArgs e)
         {
+            if (test.OrderIndex < 1)
+                Save();
             var editCmd=DependencyInjector.Resolve<EditCommand>(new { test=test, parentForm=this, projectManager });
             if(editCmd!=null)
             {
@@ -159,6 +167,17 @@ namespace WebappVisualTester
             var executor=DependencyInjector.Resolve<TestExecutor>(new { test = test });
            string res= executor.Start(null,null);
             richTextBox1.Text = res;
+
+            var projectFolder=Global.GetProjectsPath()+"\\"+projectManager.Project.Id;
+            var testImagesFolder = projectFolder + "\\Tests\\" + test.Id+"\\Images";
+            var dziFolder= projectFolder + "\\Tests\\" + test.Id + "\\dzi";
+            if (Directory.Exists(testImagesFolder) && Directory.Exists(dziFolder))
+            {
+                    var dz = DependencyInjector.Retrieve<DeepZoomManager>();
+                    dz.GetImages(testImagesFolder, dziFolder);
+            }
+            else
+                MessageBox.Show("Images or dzi directory in Test folder does not exist");
         }
 
         private void btnVisualNavigation_Click(object sender, EventArgs e)
