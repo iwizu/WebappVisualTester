@@ -174,13 +174,17 @@ namespace WebappVisualTester
 
         private void btnExecuteTest_Click(object sender, EventArgs e)
         {
+            var projectFolder = Global.GetProjectsPath() + "\\" + projectManager.Project.Id;
+            var testImagesFolder = projectFolder + "\\Tests\\" + test.Id + "\\Images";
+            var dziFolder = projectFolder + "\\Tests\\" + test.Id + "\\dzi";
+            DeleteAllInDirectory(testImagesFolder);
+            DeleteAllInDirectory(dziFolder);
+
             var executor=DependencyInjector.Resolve<TestExecutor>(new { test = test });
            string res= executor.Start(null,null);
             richTextBox1.Text = res;
 
-            var projectFolder=Global.GetProjectsPath()+"\\"+projectManager.Project.Id;
-            var testImagesFolder = projectFolder + "\\Tests\\" + test.Id+"\\Images";
-            var dziFolder= projectFolder + "\\Tests\\" + test.Id + "\\dzi";
+            
             if (Directory.Exists(testImagesFolder) && Directory.Exists(dziFolder))
             {
                     var dz = DependencyInjector.Retrieve<DeepZoomManager>();
@@ -190,6 +194,20 @@ namespace WebappVisualTester
                 MessageBox.Show("Images or dzi directory in Test folder does not exist");
 
             projectManager.SaveProject();
+        }
+
+        private void DeleteAllInDirectory(string directory)
+        {
+            System.IO.DirectoryInfo di = new DirectoryInfo(directory);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
 
         private void btnVisualNavigation_Click(object sender, EventArgs e)

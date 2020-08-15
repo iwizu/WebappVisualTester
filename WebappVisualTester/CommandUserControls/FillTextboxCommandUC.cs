@@ -45,20 +45,14 @@ namespace WebappVisualTester
         }
         private void Save()
         {
+            var selFindByUC = selectElementuc1.GetData();
+
             if (parentForm != null)
             {
                 if (command == null || command.OrderIndex == 0)
                 {
                     command = new FillTextboxCommand();
-                    command.Title = mainCommandForm.GetTitle();
-                    command.ElementId = txtId.Text;
-                    command.Class = txtClass.Text;
-                    command.Text = txtText.Text;
-                    Guid? belongToIndex = comboBox1.SelectedValue as Guid?;
-                    if (belongToIndex.HasValue)
-                        command.BelongsToCommandIndex = belongToIndex;
-                    else
-                        command.BelongsToCommandIndex = null;
+                    
                     command.OrderIndex = 1;
                     if (test.Commands.Any())
                     {
@@ -66,18 +60,18 @@ namespace WebappVisualTester
                     }
                     test.Commands.Add(command);
                 }
+
+                command.Title = mainCommandForm.GetTitle();
+                command.Text = txtText.Text;
+                command.FindBy = selFindByUC.FindBy;
+                command.FindByValue = selFindByUC.FindBy;
+                command.Wait = selFindByUC.Wait;
+                command.ScrollToElement = selFindByUC.ScrollToElement;
+                Guid? belongToIndex = comboBox1.SelectedValue as Guid?;
+                if (belongToIndex.HasValue)
+                    command.BelongsToCommandIndex = belongToIndex;
                 else
-                {
-                    command.Title = mainCommandForm.GetTitle();
-                    command.ElementId = txtId.Text;
-                    command.Class = txtClass.Text;
-                    command.Text = txtText.Text;
-                    Guid? belongToIndex = comboBox1.SelectedValue as Guid?;
-                    if (belongToIndex.HasValue)
-                        command.BelongsToCommandIndex = belongToIndex;
-                    else
-                        command.BelongsToCommandIndex = null;
-                }
+                    command.BelongsToCommandIndex = null;
             }
             projectManager.SaveProject();
         }
@@ -87,8 +81,15 @@ namespace WebappVisualTester
             RefreshCommands();
             if (command!=null && command.OrderIndex>0)
             {
-                txtId.Text= command.ElementId;
-                txtClass.Text = command.Class;
+                FindElement f = new FindElement()
+                {
+                    FindBy = command.FindBy,
+                    FindByValue = command.FindByValue,
+                    Wait = command.Wait,
+                    ScrollToElement = command.ScrollToElement
+                };
+                selectElementuc1.SetData(f);
+
                 txtText.Text = command.Text;
                 if (command.BelongsToCommandIndex.HasValue)
                     comboBox1.SelectedValue = command.BelongsToCommandIndex;

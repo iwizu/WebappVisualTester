@@ -62,7 +62,7 @@ namespace WebappVisualTester
                         if (d != null && driver.PageSource.Contains(d.IfContainsString))
                         {
                             var subCommands = test.Commands.Where(i => i.BelongsToCommandIndex.HasValue
-                                && i.BelongsToCommandIndex.Equals(d.OrderIndex))
+                                && i.BelongsToCommandIndex.Equals(d.Id))
                                 .OrderBy(i => i.OrderIndex).ToList();
                             s.AppendLine(Start(subCommands, driver));
                         }                        
@@ -72,28 +72,22 @@ namespace WebappVisualTester
                         var d = cmd as FillTextboxCommand;
                         if (d != null)
                         {
-                            if (!string.IsNullOrEmpty(d.ElementId))
+                            IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
+                            if (webElement != null)
                             {
-                                var input = driver.FindElement(By.XPath("//input[@id='" + d.Id + "']"));
-                                if (input != null)
+                                if (d.ScrollToElement)
                                 {
-                                    input.SendKeys(d.Text);
-                                    s.AppendLine("Success: FillTextboxCommand - Send"+d.Text+" to input with Id " + d.Id);
+                                    Actions actions = new Actions(driver);
+                                    actions.MoveToElement(webElement);
+                                    actions.Perform();
                                 }
-                                else
-                                    s.AppendLine("Error: FillTextboxCommand - Cannot find input with Id " + d.Id);
+                                webElement.SendKeys(d.Text);
+                                s.AppendLine("Success: send text: "+d.Text+" to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                             }
-                            else if (!string.IsNullOrEmpty(d.Class))
+                            else
                             {
-                                var input = driver.FindElement(By.XPath("//input[@class='" + d.Class + "']"));
-                                if (input != null)
-                                {
-                                    input.SendKeys(d.Text);
-                                    s.AppendLine("Success: FillTextboxCommand - Send" + d.Text + " to input with class " + d.Class);
-                                }
-                                else
-                                    s.AppendLine("Error: FillTextboxCommand - Cannot find input with class " + d.Class);
-                            }
+                                s.AppendLine("Error: send text: " + d.Text + " to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                            }                            
                         }
                     }
                     else if (cmd._type.Contains(nameof(ClickButtonCommand)))
@@ -103,76 +97,22 @@ namespace WebappVisualTester
                         {
                             try
                             {
-                                if (d.ButtonType.Equals("button tag:input"))
+                                IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue,d.Wait);
+                                if (webElement != null)
                                 {
-                                    var btn = driver.FindElement(By.XPath("//input[@id='" + d.ButtonId + "']"));
-                                    if (btn != null)
-                                    {
-                                        btn.Click();
-                                        s.AppendLine("Success: Click Button - type Input with id " + d.ButtonId);
-                                    }
-                                    else
-                                        s.AppendLine("Error: Click Button - type Input with id " + d.ButtonId);
-                                }
-                                else if (d.ButtonType.Equals("button tag:a"))
-                                {
-                                    var btn = driver.FindElement(By.XPath("//a[@id='" + d.ButtonId + "']"));
-                                    if (btn != null)
-                                    {
-                                        btn.Click();
-                                        s.AppendLine("Success: Click Button - type a with id " + d.ButtonId);
-                                    }
-                                    else
-                                        s.AppendLine("Error: Click Button - type a with id " + d.ButtonId);
-                                }
-                                else if (d.ButtonType.Equals("input type:submit"))
-                                {
-                                    var btn=FindElement(driver, By.XPath("//input[@type='submit']"), 10);
-                                   
-                                    if (btn != null)
-                                    {                                        
-                                        Actions actions = new Actions(driver);
-                                        actions.MoveToElement(btn);
-                                        actions.Perform();
-                                                                                
-                                        btn.Click();
-                                        s.AppendLine("Success: Click Button - with type=submit");
-                                    }
-                                    else
-                                        s.AppendLine("Error: Click Button - with type=submit");
-                                }
-                                else if (d.ButtonType.Equals("An element with Id"))
-                                {
-                                    var btn = FindElement(driver, By.Id(d.ButtonId), 10);
-
-                                    if (btn != null)
+                                    if (d.ScrollToElement)
                                     {
                                         Actions actions = new Actions(driver);
-                                        actions.MoveToElement(btn);
+                                        actions.MoveToElement(webElement);
                                         actions.Perform();
-
-                                        btn.Click();
-                                        s.AppendLine("Success: Click Button - with type=submit " + d.ButtonId);
                                     }
-                                    else
-                                        s.AppendLine("Error: Click Button - with type=submit " + d.ButtonId);
+                                    webElement.Click();
+                                    s.AppendLine("Success: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                                 }
-                                else if (d.ButtonType.Equals("An element with class"))
+                                else
                                 {
-                                    var btn = FindElement(driver, By.ClassName(d.ButtonClass), 10);
-
-                                    if (btn != null)
-                                    {
-                                        Actions actions = new Actions(driver);
-                                        actions.MoveToElement(btn);
-                                        actions.Perform();
-
-                                        btn.Click();
-                                        s.AppendLine("Success: Click Button - with class "+ d.ButtonClass);
-                                    }
-                                    else
-                                        s.AppendLine("Error: Click Button - with class " + d.ButtonClass);
-                                }
+                                    s.AppendLine("Error: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                }                             
                             }
                             catch(Exception ex)
                             {
@@ -185,6 +125,49 @@ namespace WebappVisualTester
             }
             return s.ToString();
         }
+
+        private IWebElement FindElement(ChromeDriver driver, string findBy,string findByValue,int wait)
+        {
+            By by;
+            if(findBy.Equals("Class"))
+            {
+                by = By.ClassName(findByValue);
+            }
+            else if (findBy.Equals("Css selector"))
+            {
+                by = By.CssSelector(findByValue);
+            }
+            else if (findBy.Equals("Id"))
+            {
+                by = By.Id(findByValue);
+            }
+            else if (findBy.Equals("LinkText"))
+            {
+                by = By.LinkText(findByValue);
+            }
+            else if (findBy.Equals("Name"))
+            {
+                by = By.Name(findByValue);
+            }
+            else if (findBy.Equals("PartialLinkText"))
+            {
+                by = By.PartialLinkText(findByValue);
+            }
+            else if (findBy.Equals("TagName"))
+            {
+                by = By.TagName(findByValue);
+            }
+            else if (findBy.Equals("XPath"))
+            {
+                by = By.XPath(findByValue);
+            }
+            else
+            {
+                by = By.CssSelector(findByValue);
+            }
+            return FindElement(driver, by, wait);
+        }
+
         public static IWebElement FindElement(IWebDriver driver, By by, int timeoutInSeconds)
         {
             if (timeoutInSeconds > 0)

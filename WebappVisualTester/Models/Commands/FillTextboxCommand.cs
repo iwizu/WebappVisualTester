@@ -4,8 +4,11 @@ namespace WebappVisualTester.Models
 {
     public class FillTextboxCommand : Command
     {
-        public string ElementId { get; set; }
-        public string Class { get; set; }
+        public string FindBy { get; set; }
+        public string FindByValue { get; set; }
+        public int Wait { get; set; }
+        public bool ScrollToElement { get; set; }
+
         public string Text { get; set; }
 
         public override ICommand GetClone()
@@ -15,9 +18,12 @@ namespace WebappVisualTester.Models
                 Id = Guid.NewGuid(),
                 OrderIndex = this.OrderIndex,
                 Title = this.Title,
-                BelongsToCommandIndex = this.BelongsToCommandIndex,
-                Class = this.Class,
-                Text = this.Text
+                BelongsToCommandIndex = this.BelongsToCommandIndex,          
+                Text = this.Text,
+                FindBy = this.FindBy,
+                FindByValue = this.FindByValue,
+                Wait = this.Wait,
+                ScrollToElement = this.ScrollToElement
             };
         }
     }

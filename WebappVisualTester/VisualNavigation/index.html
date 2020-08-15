@@ -11,6 +11,12 @@
     var viewer = OpenSeadragon({
         id: "openseadragon1",
         prefixUrl: "/openseadragon/images/",
+        showNavigator: true,
+        navigatorPosition: "ABSOLUTE",
+        navigatorTop: "40px",
+        navigatorLeft: "4px",
+        navigatorHeight: "120px",
+        navigatorWidth: "145px",
         collectionMode: true,
         collectionRows: rowsNum,
         collectionTileSize: tileWidth,

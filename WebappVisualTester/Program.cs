@@ -53,6 +53,8 @@ namespace WebappVisualTester
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
             settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            settings.PersistSessionCookies = true;
+            settings.CachePath = @"C:\cookies";
             Cef.Initialize(settings);
             Cef.EnableHighDPISupport();
 
