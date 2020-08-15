@@ -52,13 +52,16 @@ namespace WebappVisualTester
             
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
+            settings.CefCommandLineArgs.Add("disable-gpu", "1");
             Cef.Initialize(settings);
+            Cef.EnableHighDPISupport();
+
 
             DependencyInjector.Register<IProjectManager, ProjectManager>();
             DependencyInjector.Register<IPackageManager, PackageManager>();
             DependencyInjector.Register<ICommand, NavigateToUrlCommand>();
             DependencyInjector.UnityContainer.RegisterType<DeepZoomManager>();
-
+            DependencyInjector.UnityContainer.RegisterType<VisualNavigationForm>();
 
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

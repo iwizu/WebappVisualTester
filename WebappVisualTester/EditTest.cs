@@ -19,6 +19,16 @@ namespace WebappVisualTester
             this.test = test;
             this.parentForm = parentForm;
             this.projectManager = projectManager;
+
+            string testFolder = Global.GetTestFolderPath(test, projectManager.Project);
+            if(!Directory.Exists(testFolder+"\\Images"))
+            {
+                Directory.CreateDirectory(testFolder + "\\Images");
+            }
+            if (!Directory.Exists(testFolder + "\\dzi"))
+            {
+                Directory.CreateDirectory(testFolder + "\\dzi");
+            }
         }
 
         private void EditTest_Load(object sender, EventArgs e)
@@ -178,12 +188,13 @@ namespace WebappVisualTester
             }
             else
                 MessageBox.Show("Images or dzi directory in Test folder does not exist");
+
+            projectManager.SaveProject();
         }
 
         private void btnVisualNavigation_Click(object sender, EventArgs e)
         {
-            VisualNavigationForm visNavForm = new VisualNavigationForm();
-            //var visNavForm = DependencyInjector.Retrieve<VisualNavigationForm>();
+            var visNavForm = DependencyInjector.Resolve<VisualNavigationForm>(new { test=test });
             visNavForm.ShowDialog();
         }
     }

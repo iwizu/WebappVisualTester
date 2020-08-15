@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using WebappVisualTester.Models;
 
 namespace WebappVisualTester
 {
@@ -24,9 +25,57 @@ namespace WebappVisualTester
             return "";
         }
 
+        public static string GetProjectFolderPath(Project project)
+        {
+            try
+            {
+                string currentPath = GetProjectsPath();
+                string projectFolderPath = currentPath + "\\"+ project.Id;
+                if (!Directory.Exists(projectFolderPath))
+                {
+                    Directory.CreateDirectory(projectFolderPath);
+                }
+                return projectFolderPath;
+            }
+            catch { }
+            return "";
+        }
+
+        public static string GetTestFolderPath(Test test,Project project)
+        {
+            try
+            { 
+                string projectPath = GetProjectFolderPath(project);
+                string testFolderPath = projectPath + "\\Tests\\"+test.Id;
+                if (!Directory.Exists(testFolderPath))
+                {
+                    Directory.CreateDirectory(testFolderPath);
+                }
+                return testFolderPath;
+            }
+            catch { }
+            return "";
+        }
+
+        public static string GetVisualNavigationPath()
+        {
+            try
+            {
+                string currentPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                string visualNavigationFolderPath = currentPath + "\\VisualNavigation";
+                if (!Directory.Exists(visualNavigationFolderPath))
+                {
+                    Directory.CreateDirectory(visualNavigationFolderPath);
+                }
+                return visualNavigationFolderPath;
+            }
+            catch { }
+            return "";
+        }
+
         public static void DeleteTempProjectDirectories()
         {
-            var projectsPath=GetProjectsPath();            
+            var projectsPath=GetProjectsPath();
                 var directories = Directory.GetDirectories(projectsPath);
                 if (directories.Any())
                 {

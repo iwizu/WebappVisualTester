@@ -199,10 +199,11 @@ namespace WebappVisualTester
             try
             {
                 Screenshot ss = ((ITakesScreenshot)driver).GetScreenshot();
-                string currentFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\Screenshots";
-                if (!Directory.Exists(currentFolder))
-                    Directory.CreateDirectory(currentFolder);
-                ss.SaveAsFile(currentFolder + "\\Image" + actionNum + ".png", ScreenshotImageFormat.Png);
+                string testFolder=Global.GetTestFolderPath(test, projectManager.Project);
+                string imagesFolder = testFolder + "\\Images";
+                if (!Directory.Exists(imagesFolder))
+                    Directory.CreateDirectory(imagesFolder);
+                ss.SaveAsFile(imagesFolder + "\\Image" + actionNum + ".png", ScreenshotImageFormat.Png);
                 return "Success: Screenshot - " + "Image" + actionNum + ".png";
             }
             catch(Exception ex)

@@ -59,6 +59,11 @@
     <Compile Update="CommandUserControls\NavigateToUrlCommandUC.cs" />
     <Compile Update="EditTest.cs" />
     <Compile Update="EditCommand.cs" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -116,10 +121,17 @@
     <EmbeddedResource Update="EditTest - Copy.resx">
       <DependentUpon>EditTest.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="VisualNavigation\index.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="VisualNavigation\openseadragon\d3.v5.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="VisualNavigation\openseadragon\openseadragon-svg-overlay.js">
