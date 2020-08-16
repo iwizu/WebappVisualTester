@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditTest));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
@@ -41,13 +42,16 @@
             this.btnExecuteTest = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.picResult = new System.Windows.Forms.PictureBox();
             this.btnVisualNavigation = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgrCommands)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -231,7 +235,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.picResult);
             this.tabPage1.Controls.Add(this.btnVisualNavigation);
+            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.dgrCommands);
             this.tabPage1.Controls.Add(this.btnDownOrder);
@@ -245,6 +251,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // picResult
+            // 
+            this.picResult.Image = ((System.Drawing.Image)(resources.GetObject("picResult.Image")));
+            this.picResult.Location = new System.Drawing.Point(286, 10);
+            this.picResult.Name = "picResult";
+            this.picResult.Size = new System.Drawing.Size(25, 23);
+            this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picResult.TabIndex = 3;
+            this.picResult.TabStop = false;
             // 
             // btnVisualNavigation
             // 
@@ -263,6 +279,15 @@
             this.btnVisualNavigation.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnVisualNavigation.UseVisualStyleBackColor = false;
             this.btnVisualNavigation.Click += new System.EventHandler(this.btnVisualNavigation_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(228, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 20);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Result:";
             // 
             // tabPage2
             // 
@@ -314,6 +339,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picResult)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -340,6 +366,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnVisualNavigation;
+        private System.Windows.Forms.PictureBox picResult;
+        private System.Windows.Forms.Label label5;
     }
 }
 

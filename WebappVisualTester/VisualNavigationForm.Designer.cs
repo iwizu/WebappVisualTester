@@ -146,6 +146,7 @@
             this.Controls.Add(this.txtTileSize);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.picWait);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VisualNavigationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VisualNavigationForm";

@@ -26,112 +26,58 @@ namespace WebappVisualTester
         public string Start(List<ICommand> cmds,ChromeDriver driver)
         {
             StringBuilder s = new StringBuilder();
-            if (driver == null)
+            try
             {
-                driver = new ChromeDriver();
-                drivers.Add(driver);
-            }
-            if (test!=null)
-            {
-                if (cmds == null)
+                if (driver == null)
                 {
-                    cmds = test.Commands.Where(i => !i.BelongsToCommandIndex.HasValue).OrderBy(i => i.OrderIndex).ToList();
+                    driver = new ChromeDriver();
+                    drivers.Add(driver);
                 }
-                foreach(var cmd in cmds)
+                if (test != null)
                 {
-                    if (cmd._type.Contains(nameof(NavigateToUrlCommand)))
+                    if (cmds == null)
                     {
-                        var d = cmd as NavigateToUrlCommand;
-                        if(d!=null)
-                        {
-                            driver.Navigate().GoToUrl(d.Url);
-                            s.AppendLine("Success: Navigate to URL - " + d.Url);
-                            cmd.RunSuccessfuly = true;
-                        }
+                        cmds = test.Commands.Where(i => !i.BelongsToCommandIndex.HasValue).OrderBy(i => i.OrderIndex).ToList();
                     }
-                    else if (cmd._type.Contains(nameof(TakeScreenshotCommand)))
+                    foreach (var cmd in cmds)
                     {
-                        var d = cmd as TakeScreenshotCommand;
-                        if (d != null)
+                        cmd.RunSuccessfuly = false;
+                        if (cmd._type.Contains(nameof(NavigateToUrlCommand)))
                         {
-                            s.AppendLine(GetScreenshot(d.OrderIndex,driver));
-                            cmd.RunSuccessfuly = true;
-                        }
-                    }
-                    else if (cmd._type.Contains(nameof(IfContainsStringCommand)))
-                    {
-                        var d = cmd as IfContainsStringCommand;
-                        if (d != null && driver.PageSource.Contains(d.IfContainsString))
-                        {
-                            var subCommands = test.Commands.Where(i => i.BelongsToCommandIndex.HasValue
-                                && i.BelongsToCommandIndex.Equals(d.Id))
-                                .OrderBy(i => i.OrderIndex).ToList();
-                            s.AppendLine(Start(subCommands, driver));
-                            cmd.RunSuccessfuly = true;
-                        }
-                    }
-                    else if (cmd._type.Contains(nameof(FillTextboxCommand)))
-                    {
-                        var d = cmd as FillTextboxCommand;
-                        if (d != null)
-                        {
-                            IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
-                            if (webElement != null)
+                            var d = cmd as NavigateToUrlCommand;
+                            if (d != null)
                             {
-                                if (d.ScrollToElement)
-                                {
-                                    Actions actions = new Actions(driver);
-                                    actions.MoveToElement(webElement);
-                                    actions.Perform();
-                                }
-                                webElement.SendKeys(d.Text);
+                                driver.Navigate().GoToUrl(d.Url);
+                                s.AppendLine("Success: Navigate to URL - " + d.Url);
                                 cmd.RunSuccessfuly = true;
-                                s.AppendLine("Success: send text: "+d.Text+" to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                             }
-                            else
-                            {
-                                s.AppendLine("Error: send text: " + d.Text + " to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
-                            }                            
                         }
-                    }
-                    else if (cmd._type.Contains(nameof(ClickButtonCommand)))
-                    {
-                        var d = cmd as ClickButtonCommand;
-                        if (d != null)
+                        else if (cmd._type.Contains(nameof(TakeScreenshotCommand)))
                         {
-                            try
+                            var d = cmd as TakeScreenshotCommand;
+                            if (d != null)
                             {
-                                IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue,d.Wait);
-                                if (webElement != null)
-                                {
-                                    if (d.ScrollToElement)
-                                    {
-                                        Actions actions = new Actions(driver);
-                                        actions.MoveToElement(webElement);
-                                        actions.Perform();
-                                    }
-                                    webElement.Click();
-                                    cmd.RunSuccessfuly = true;
-                                    s.AppendLine("Success: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
-                                }
-                                else
-                                {
-                                    s.AppendLine("Error: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
-                                }                             
+                                s.AppendLine(GetScreenshot(d.OrderIndex, driver));
+                                cmd.RunSuccessfuly = true;
                             }
-                            catch(Exception ex)
-                            {
-                                s.AppendLine("Error: Click Button - Exception:" + ex.ToString());
-                            }                     
                         }
-                    }
-                    else if (cmd._type.Contains(nameof(SelectFromDropdownCommand)))
-                    {
-                        var d = cmd as SelectFromDropdownCommand;
-                        if (d != null)
+                        else if (cmd._type.Contains(nameof(IfContainsStringCommand)))
                         {
-                            try
-                            {                                
+                            var d = cmd as IfContainsStringCommand;
+                            if (d != null && driver.PageSource.Contains(d.IfContainsString))
+                            {
+                                var subCommands = test.Commands.Where(i => i.BelongsToCommandIndex.HasValue
+                                    && i.BelongsToCommandIndex.Equals(d.Id))
+                                    .OrderBy(i => i.OrderIndex).ToList();
+                                s.AppendLine(Start(subCommands, driver));
+                                cmd.RunSuccessfuly = true;
+                            }
+                        }
+                        else if (cmd._type.Contains(nameof(FillTextboxCommand)))
+                        {
+                            var d = cmd as FillTextboxCommand;
+                            if (d != null)
+                            {
                                 IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
                                 if (webElement != null)
                                 {
@@ -141,33 +87,92 @@ namespace WebappVisualTester
                                         actions.MoveToElement(webElement);
                                         actions.Perform();
                                     }
-                                    //create select element object 
-                                    var selectElement = new SelectElement(webElement);
-
-                                    if (d.SelectByTextValue.Equals("By Value"))
-                                    {
-                                        selectElement.SelectByValue(d.SelectedValue);
-                                    }
-                                    else
-                                    {
-                                        selectElement.SelectByText(d.SelectedValue);
-                                    }
+                                    webElement.SendKeys(d.Text);
                                     cmd.RunSuccessfuly = true;
-                                    s.AppendLine("Success: select "+ d.SelectByTextValue +": "+d.SelectedValue+ " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    s.AppendLine("Success: send text: " + d.Text + " to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                                 }
                                 else
                                 {
-                                    s.AppendLine("Error: select " + d.SelectByTextValue + ": " + d.SelectedValue + " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    s.AppendLine("Error: send text: " + d.Text + " to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                                 }
                             }
-                            catch (Exception ex)
+                        }
+                        else if (cmd._type.Contains(nameof(ClickButtonCommand)))
+                        {
+                            var d = cmd as ClickButtonCommand;
+                            if (d != null)
                             {
-                                s.AppendLine("Error: Exception:" + ex.ToString());
+                                try
+                                {
+                                    IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
+                                    if (webElement != null)
+                                    {
+                                        if (d.ScrollToElement)
+                                        {
+                                            Actions actions = new Actions(driver);
+                                            actions.MoveToElement(webElement);
+                                            actions.Perform();
+                                        }
+                                        webElement.Click();
+                                        cmd.RunSuccessfuly = true;
+                                        s.AppendLine("Success: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    }
+                                    else
+                                    {
+                                        s.AppendLine("Error: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    s.AppendLine("Error: Click Button - Exception:" + ex.ToString());
+                                }
+                            }
+                        }
+                        else if (cmd._type.Contains(nameof(SelectFromDropdownCommand)))
+                        {
+                            var d = cmd as SelectFromDropdownCommand;
+                            if (d != null)
+                            {
+                                try
+                                {
+                                    IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
+                                    if (webElement != null)
+                                    {
+                                        if (d.ScrollToElement)
+                                        {
+                                            Actions actions = new Actions(driver);
+                                            actions.MoveToElement(webElement);
+                                            actions.Perform();
+                                        }
+                                        //create select element object 
+                                        var selectElement = new SelectElement(webElement);
+
+                                        if (d.SelectByTextValue.Equals("By Value"))
+                                        {
+                                            selectElement.SelectByValue(d.SelectedValue);
+                                        }
+                                        else
+                                        {
+                                            selectElement.SelectByText(d.SelectedValue);
+                                        }
+                                        cmd.RunSuccessfuly = true;
+                                        s.AppendLine("Success: select " + d.SelectByTextValue + ": " + d.SelectedValue + " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    }
+                                    else
+                                    {
+                                        s.AppendLine("Error: select " + d.SelectByTextValue + ": " + d.SelectedValue + " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    s.AppendLine("Error: Exception:" + ex.ToString());
+                                }
                             }
                         }
                     }
                 }
             }
+            catch { }
             return s.ToString();
         }
 

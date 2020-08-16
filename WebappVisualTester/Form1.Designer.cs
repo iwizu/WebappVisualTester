@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnNewProject = new System.Windows.Forms.Button();
             this.btnOpenProject = new System.Windows.Forms.Button();
             this.txtProjectTitle = new System.Windows.Forms.TextBox();
@@ -331,9 +332,10 @@
             this.Controls.Add(this.btnSaveProject);
             this.Controls.Add(this.btnOpenProject);
             this.Controls.Add(this.btnNewProject);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Step by Step UI Test";
+            this.Text = "WebAppUITest - Step by step UI Test!";
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);

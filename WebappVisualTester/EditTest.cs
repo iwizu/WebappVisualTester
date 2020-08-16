@@ -54,15 +54,25 @@ namespace WebappVisualTester
                           .ToList();
                     dgrCommands.DataSource=ds;
                     dgrCommands.Columns["OrderIndex"].Visible = false;
-                    //dgrCommands.Columns["_type"].Visible = false;
                     dgrCommands.Columns["Id"].Visible = false;
-                    dgrCommands.Columns["RunSuccessfuly"].Width = 20;
-                    dgrCommands.Columns["BelongsToCommand"].Width = 150;
-                    dgrCommands.Columns["Title"].Width = dgrCommands.Width-
-                        dgrCommands.Columns["RunSuccessfuly"].Width-
-                        dgrCommands.Columns["Title"].Width
-                         - 72;
+                    ResizeGrid();
 
+                    bool runSuccessfuly = true;
+                    foreach(var itm in test.Commands)
+                    {
+                        if (!itm.RunSuccessfuly)
+                        {
+                            runSuccessfuly = false;
+                        }
+                    }
+                    var img = Properties.Resources.Ok_48px;
+                    if (!runSuccessfuly)
+                        img = Properties.Resources.Error_48px;
+                        picResult.Invoke((MethodInvoker)delegate
+                        {
+                            // Running on the UI thread
+                            picResult.Image = img;
+                        });                  
                 }
             }
         }
@@ -143,7 +153,6 @@ namespace WebappVisualTester
         {
             if(dgrCommands.SelectedRows.Count>0)
             {
-                //var cmd= dgrCommands.SelectedRows[0].DataBoundItem;
                 Guid? id=dgrCommands.SelectedRows[0].Cells["Id"].Value as Guid?;
                 if (id.HasValue)
                 {
@@ -252,19 +261,21 @@ namespace WebappVisualTester
 
         private void dgrCommands_Resize(object sender, EventArgs e)
         {
+            ResizeGrid();
+        }
+        private void ResizeGrid()
+        {
             if (dgrCommands.ColumnCount == 5)
             {
                 dgrCommands.Columns["RunSuccessfuly"].Width = 29;
                 dgrCommands.Columns["BelongsToCommand"].Width = 150;
-                var value0 = dgrCommands.Columns["Title"].Width;
-                var value= dgrCommands.Width -
+                var value = dgrCommands.Width -
                     dgrCommands.Columns["RunSuccessfuly"].Width -
                     dgrCommands.Columns["BelongsToCommand"].Width
-                   -dgrCommands.RowHeadersWidth-2;
-                dgrCommands.Columns["Title"].Width = value;            
+                   - dgrCommands.RowHeadersWidth - 2;
+                dgrCommands.Columns["Title"].Width = value;
             }
         }
-
         private void dgrCommands_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
                     dgrCommands.Rows[e.RowIndex].Cells[2].ReadOnly = true;                       

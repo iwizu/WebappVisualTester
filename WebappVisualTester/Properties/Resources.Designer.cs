@@ -63,6 +63,36 @@ namespace WebappVisualTester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Error_48px {
+            get {
+                object obj = ResourceManager.GetObject("Error_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Navigation_Toolbar_Left_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Navigation_Toolbar_Left_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ok_48px {
+            get {
+                object obj = ResourceManager.GetObject("Ok_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap wait {
             get {
                 object obj = ResourceManager.GetObject("wait", resourceCulture);
