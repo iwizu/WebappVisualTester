@@ -43,12 +43,26 @@ namespace WebappVisualTester
                 if (test.Commands != null && test.Commands.Any())
                 {
                     var ds= test.Commands
+                        .Select(i=> new { 
+                         i.Id,
+                            i.Title,
+                            BelongsToCommand =test.Commands.FirstOrDefault(j=>j.Id==i.BelongsToCommandIndex)?.Title,
+                            i.RunSuccessfuly,
+                            i.OrderIndex
+                        })
                           .OrderBy(i => i.OrderIndex)
                           .ToList();
                     dgrCommands.DataSource=ds;
                     dgrCommands.Columns["OrderIndex"].Visible = false;
-                    dgrCommands.Columns["_type"].Visible = false;
+                    //dgrCommands.Columns["_type"].Visible = false;
                     dgrCommands.Columns["Id"].Visible = false;
+                    dgrCommands.Columns["RunSuccessfuly"].Width = 20;
+                    dgrCommands.Columns["BelongsToCommand"].Width = 150;
+                    dgrCommands.Columns["Title"].Width = dgrCommands.Width-
+                        dgrCommands.Columns["RunSuccessfuly"].Width-
+                        dgrCommands.Columns["Title"].Width
+                         - 72;
+
                 }
             }
         }
@@ -57,19 +71,24 @@ namespace WebappVisualTester
         {
             if (dgrCommands.SelectedRows.Count > 0)
             {
-                var command = dgrCommands.SelectedRows[0].DataBoundItem as Command;
-                if (command != null)
+                //var cmd= dgrCommands.SelectedRows[0].DataBoundItem;
+                Guid? id = dgrCommands.SelectedRows[0].Cells["Id"].Value as Guid?;
+                if (id.HasValue)
                 {
-                    var orderedCommands = test.Commands.OrderBy(i => i.OrderIndex).ToList();
-                    var index = orderedCommands.IndexOf(command);
-                    if (index > 0)
+                    var command = test.Commands.FirstOrDefault(i => i.Id == id);
+                    if (command != null)
                     {
-                        orderedCommands[index - 1].OrderIndex = index+1;
-                        orderedCommands[index].OrderIndex = index;
-                        projectManager.SaveProject();
-                        RefreshCommands();
-                        dgrCommands.ClearSelection();
-                        dgrCommands.Rows[index - 1].Selected = true;
+                        var orderedCommands = test.Commands.OrderBy(i => i.OrderIndex).ToList();
+                        var index = orderedCommands.IndexOf(command);
+                        if (index > 0)
+                        {
+                            orderedCommands[index - 1].OrderIndex = index + 1;
+                            orderedCommands[index].OrderIndex = index;
+                            projectManager.SaveProject();
+                            RefreshCommands();
+                            dgrCommands.ClearSelection();
+                            dgrCommands.Rows[index - 1].Selected = true;
+                        }
                     }
                 }
             }
@@ -124,13 +143,18 @@ namespace WebappVisualTester
         {
             if(dgrCommands.SelectedRows.Count>0)
             {
-               var cmd= dgrCommands.SelectedRows[0].DataBoundItem;
-                if (cmd != null)
+                //var cmd= dgrCommands.SelectedRows[0].DataBoundItem;
+                Guid? id=dgrCommands.SelectedRows[0].Cells["Id"].Value as Guid?;
+                if (id.HasValue)
                 {
-                    var editCmd = DependencyInjector.Resolve<EditCommand>(new { command= cmd, test = test, parentForm = this, projectManager });
-                    if (editCmd != null)
+                    var cmd = test.Commands.FirstOrDefault(i => i.Id == id);
+                    if (cmd != null)
                     {
-                        editCmd.ShowDialog();
+                        var editCmd = DependencyInjector.Resolve<EditCommand>(new { command = cmd, test = test, parentForm = this, projectManager });
+                        if (editCmd != null)
+                        {
+                            editCmd.ShowDialog();
+                        }
                     }
                 }
             }
@@ -138,21 +162,26 @@ namespace WebappVisualTester
 
         private void btnDownOrder_Click(object sender, EventArgs e)
         {
+            //var cmd= dgrCommands.SelectedRows[0].DataBoundItem;
             if (dgrCommands.SelectedRows.Count > 0)
             {
-                var cmd = dgrCommands.SelectedRows[0].DataBoundItem as Command;
-                if (cmd != null)
+                Guid? id = dgrCommands.SelectedRows[0].Cells["Id"].Value as Guid?;
+                if (id.HasValue)
                 {
-                    var orderedCommands = test.Commands.OrderBy(i => i.OrderIndex).ToList();
-                    var index = orderedCommands.IndexOf(cmd);
-                    if (index < test.Commands.Count - 1)
+                    var cmd = test.Commands.FirstOrDefault(i => i.Id == id);
+                    if (cmd != null)
                     {
-                        orderedCommands[index + 1].OrderIndex = index+1;
-                        orderedCommands[index].OrderIndex = index + 2;
-                        projectManager.SaveProject();
-                        RefreshCommands();
-                        dgrCommands.ClearSelection();
-                        dgrCommands.Rows[index + 1].Selected = true;
+                        var orderedCommands = test.Commands.OrderBy(i => i.OrderIndex).ToList();
+                        var index = orderedCommands.IndexOf(cmd);
+                        if (index < test.Commands.Count - 1)
+                        {
+                            orderedCommands[index + 1].OrderIndex = index + 1;
+                            orderedCommands[index].OrderIndex = index + 2;
+                            projectManager.SaveProject();
+                            RefreshCommands();
+                            dgrCommands.ClearSelection();
+                            dgrCommands.Rows[index + 1].Selected = true;
+                        }
                     }
                 }
             }
@@ -162,10 +191,14 @@ namespace WebappVisualTester
         {
             if (dgrCommands.SelectedRows.Count > 0)
             {
-                var cmd = dgrCommands.SelectedRows[0].DataBoundItem as Command;
-                if (cmd != null)
+                Guid? id = dgrCommands.SelectedRows[0].Cells["Id"].Value as Guid?;
+                if (id.HasValue)
                 {
-                    test.Commands.Remove(cmd);
+                    var cmd = test.Commands.FirstOrDefault(i => i.Id == id);
+                    if (cmd != null)
+                    {
+                        test.Commands.Remove(cmd);
+                    }
                 }
             }
             projectManager.SaveProject();
@@ -194,6 +227,7 @@ namespace WebappVisualTester
                 MessageBox.Show("Images or dzi directory in Test folder does not exist");
 
             projectManager.SaveProject();
+            RefreshCommands();
         }
 
         private void DeleteAllInDirectory(string directory)
@@ -214,6 +248,26 @@ namespace WebappVisualTester
         {
             var visNavForm = DependencyInjector.Resolve<VisualNavigationForm>(new { test=test });
             visNavForm.ShowDialog();
+        }
+
+        private void dgrCommands_Resize(object sender, EventArgs e)
+        {
+            if (dgrCommands.ColumnCount == 5)
+            {
+                dgrCommands.Columns["RunSuccessfuly"].Width = 29;
+                dgrCommands.Columns["BelongsToCommand"].Width = 150;
+                var value0 = dgrCommands.Columns["Title"].Width;
+                var value= dgrCommands.Width -
+                    dgrCommands.Columns["RunSuccessfuly"].Width -
+                    dgrCommands.Columns["BelongsToCommand"].Width
+                   -dgrCommands.RowHeadersWidth-2;
+                dgrCommands.Columns["Title"].Width = value;            
+            }
+        }
+
+        private void dgrCommands_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+                    dgrCommands.Rows[e.RowIndex].Cells[2].ReadOnly = true;                       
         }
     }
 }

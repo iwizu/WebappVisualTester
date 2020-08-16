@@ -64,7 +64,7 @@ namespace WebappVisualTester
                 command.Title = mainCommandForm.GetTitle();
                 command.Text = txtText.Text;
                 command.FindBy = selFindByUC.FindBy;
-                command.FindByValue = selFindByUC.FindBy;
+                command.FindByValue = selFindByUC.FindByValue;
                 command.Wait = selFindByUC.Wait;
                 command.ScrollToElement = selFindByUC.ScrollToElement;
                 Guid? belongToIndex = comboBox1.SelectedValue as Guid?;

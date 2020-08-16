@@ -9,11 +9,13 @@ namespace WebappVisualTester.Models
         protected Command()
         {
             Id = Guid.NewGuid();
+            RunSuccessfuly = false;
         }
         public Guid Id { get; set; }
         public int OrderIndex { get; set; }
         public string Title { get; set; }
         public Guid? BelongsToCommandIndex { get; set; }
+        public bool RunSuccessfuly { get; set; }
 
         public string _type => GetType().Name;
 public static JsonConverter StandardJsonConverter

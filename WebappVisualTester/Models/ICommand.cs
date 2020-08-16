@@ -10,5 +10,6 @@ namespace WebappVisualTester.Models
         Guid? BelongsToCommandIndex { get; set; }
         string _type { get; }
         ICommand GetClone();
+        bool RunSuccessfuly { get; set; }
     }
 }

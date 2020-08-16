@@ -46,6 +46,7 @@ namespace WebappVisualTester
                         {
                             driver.Navigate().GoToUrl(d.Url);
                             s.AppendLine("Success: Navigate to URL - " + d.Url);
+                            cmd.RunSuccessfuly = true;
                         }
                     }
                     else if (cmd._type.Contains(nameof(TakeScreenshotCommand)))
@@ -54,6 +55,7 @@ namespace WebappVisualTester
                         if (d != null)
                         {
                             s.AppendLine(GetScreenshot(d.OrderIndex,driver));
+                            cmd.RunSuccessfuly = true;
                         }
                     }
                     else if (cmd._type.Contains(nameof(IfContainsStringCommand)))
@@ -65,7 +67,8 @@ namespace WebappVisualTester
                                 && i.BelongsToCommandIndex.Equals(d.Id))
                                 .OrderBy(i => i.OrderIndex).ToList();
                             s.AppendLine(Start(subCommands, driver));
-                        }                        
+                            cmd.RunSuccessfuly = true;
+                        }
                     }
                     else if (cmd._type.Contains(nameof(FillTextboxCommand)))
                     {
@@ -82,6 +85,7 @@ namespace WebappVisualTester
                                     actions.Perform();
                                 }
                                 webElement.SendKeys(d.Text);
+                                cmd.RunSuccessfuly = true;
                                 s.AppendLine("Success: send text: "+d.Text+" to element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                             }
                             else
@@ -107,6 +111,7 @@ namespace WebappVisualTester
                                         actions.Perform();
                                     }
                                     webElement.Click();
+                                    cmd.RunSuccessfuly = true;
                                     s.AppendLine("Success: Click element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
                                 }
                                 else
@@ -117,8 +122,48 @@ namespace WebappVisualTester
                             catch(Exception ex)
                             {
                                 s.AppendLine("Error: Click Button - Exception:" + ex.ToString());
+                            }                     
+                        }
+                    }
+                    else if (cmd._type.Contains(nameof(SelectFromDropdownCommand)))
+                    {
+                        var d = cmd as SelectFromDropdownCommand;
+                        if (d != null)
+                        {
+                            try
+                            {                                
+                                IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
+                                if (webElement != null)
+                                {
+                                    if (d.ScrollToElement)
+                                    {
+                                        Actions actions = new Actions(driver);
+                                        actions.MoveToElement(webElement);
+                                        actions.Perform();
+                                    }
+                                    //create select element object 
+                                    var selectElement = new SelectElement(webElement);
+
+                                    if (d.SelectByTextValue.Equals("By Value"))
+                                    {
+                                        selectElement.SelectByValue(d.SelectedValue);
+                                    }
+                                    else
+                                    {
+                                        selectElement.SelectByText(d.SelectedValue);
+                                    }
+                                    cmd.RunSuccessfuly = true;
+                                    s.AppendLine("Success: select "+ d.SelectByTextValue +": "+d.SelectedValue+ " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                }
+                                else
+                                {
+                                    s.AppendLine("Error: select " + d.SelectByTextValue + ": " + d.SelectedValue + " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                }
                             }
-                     
+                            catch (Exception ex)
+                            {
+                                s.AppendLine("Error: Exception:" + ex.ToString());
+                            }
                         }
                     }
                 }
@@ -128,7 +173,14 @@ namespace WebappVisualTester
 
         private IWebElement FindElement(ChromeDriver driver, string findBy,string findByValue,int wait)
         {
-            By by;
+            /*
+            if (findBy == "Id" && (findByValue.Contains("-") || findByValue.Contains(".")))
+            {
+                findBy = "XPath";
+                findByValue = "//*[@id=\""+ findByValue + "\"]";
+            }
+            */
+                By by;
             if(findBy.Equals("Class"))
             {
                 by = By.ClassName(findByValue);
@@ -165,17 +217,42 @@ namespace WebappVisualTester
             {
                 by = By.CssSelector(findByValue);
             }
+
             return FindElement(driver, by, wait);
         }
 
         public static IWebElement FindElement(IWebDriver driver, By by, int timeoutInSeconds)
         {
-            if (timeoutInSeconds > 0)
+            int size = driver.FindElements(By.TagName("iframe")).Count();
+
+            try
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                return wait.Until(drv => drv.FindElement(by));
+                if (timeoutInSeconds > 0)
+                {
+                    var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                    return wait.Until(drv => drv.FindElement(by));
+                }
+
+                if (driver.FindElements(by).Count > 0)
+                {
+                    return driver.FindElement(by);
+                }
+                for (int i = 0; i < size; i++)
+                {
+                    driver.SwitchTo().Frame(i);
+                    if (driver.FindElements(by).Count > 0)
+                    {
+                        return driver.FindElement(by);
+                    }
+                    driver.SwitchTo().DefaultContent();
+
+                }
+
+                return driver.FindElement(by);
             }
-            return driver.FindElement(by);
+            catch {
+                return null;
+            }          
         }
         private string GetScreenshot(int actionNum, IWebDriver driver)
         {

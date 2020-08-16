@@ -89,14 +89,11 @@
             // 
             // txtWait
             // 
-            this.txtWait.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWait.Location = new System.Drawing.Point(110, 69);
             this.txtWait.Name = "txtWait";
             this.txtWait.Size = new System.Drawing.Size(78, 27);
             this.txtWait.TabIndex = 3;
             this.txtWait.Text = "0";
-            this.txtWait.Visible = false;
             // 
             // label2
             // 

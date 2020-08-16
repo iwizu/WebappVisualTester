@@ -43,9 +43,10 @@
             this.cmbCommandType.Items.AddRange(new object[] {
             "Take Screenshot",
             "Navigate to URL",
-            "Fill Input (type text)",
-            "Click button",
-            "If contains string"});
+            "Fill Input",
+            "Click element",
+            "If contains string",
+            "Select option"});
             this.cmbCommandType.Location = new System.Drawing.Point(13, 36);
             this.cmbCommandType.Name = "cmbCommandType";
             this.cmbCommandType.Size = new System.Drawing.Size(741, 28);

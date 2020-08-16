@@ -95,7 +95,6 @@
             this.dgrCommands.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgrCommands.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgrCommands.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrCommands.Location = new System.Drawing.Point(3, 38);
             this.dgrCommands.Name = "dgrCommands";
@@ -106,6 +105,8 @@
             this.dgrCommands.TabIndex = 4;
             this.dgrCommands.Text = "dataGridView1";
             this.dgrCommands.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrCommands_CellContentDoubleClick);
+            this.dgrCommands.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrCommands_CellValueChanged);
+            this.dgrCommands.Resize += new System.EventHandler(this.dgrCommands_Resize);
             // 
             // btnDownOrder
             // 

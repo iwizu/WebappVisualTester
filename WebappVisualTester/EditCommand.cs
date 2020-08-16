@@ -53,7 +53,7 @@ namespace WebappVisualTester
                     cmd.Dock = DockStyle.Fill;
                 }
             }
-            else if (cmbCommandType.Text == "Fill Input (type text)")
+            else if (cmbCommandType.Text == "Fill Input")
             {
                 if (command == null || command.OrderIndex == 0)
                 {
@@ -66,7 +66,7 @@ namespace WebappVisualTester
                     cmd.Dock = DockStyle.Fill;
                 }
             }
-            else if (cmbCommandType.Text == "Click button")
+            else if (cmbCommandType.Text == "Click element")
             {
                 if (command == null || command.OrderIndex == 0)
                 {
@@ -86,6 +86,19 @@ namespace WebappVisualTester
                     command = new IfContainsStringCommand();
                 }
                 var cmd = DependencyInjector.Resolve<IfContainsStringCommandUC>(new { command = command, test = test, parentForm = parentForm, mainCommandForm = this, projectManager = projectManager });
+                if (cmd != null)
+                {
+                    panel1.Controls.Add(cmd);
+                    cmd.Dock = DockStyle.Fill;
+                }
+            }
+            else if (cmbCommandType.Text == "Select option")
+            {
+                if (command == null || command.OrderIndex == 0)
+                {
+                    command = new SelectFromDropdownCommand();
+                }
+                var cmd = DependencyInjector.Resolve<SelectFromDropdownCommandUC>(new { command = command, test = test, parentForm = parentForm, mainCommandForm = this, projectManager = projectManager });
                 if (cmd != null)
                 {
                     panel1.Controls.Add(cmd);
@@ -119,12 +132,17 @@ namespace WebappVisualTester
                 }
                 else if (command.GetType().Equals(typeof(FillTextboxCommand)))
                 {
-                    cmbCommandType.Text = "Fill Input (type text)";
+                    cmbCommandType.Text = "Fill Input";
                     cmbCommandType_SelectedIndexChanged(null, null);
                 }
                 else if (command.GetType().Equals(typeof(ClickButtonCommand)))
                 {
-                    cmbCommandType.Text = "Click button";
+                    cmbCommandType.Text = "Click element";
+                    cmbCommandType_SelectedIndexChanged(null, null);
+                }
+                else if (command.GetType().Equals(typeof(SelectFromDropdownCommand)))
+                {
+                    cmbCommandType.Text = "Select option";
                     cmbCommandType_SelectedIndexChanged(null, null);
                 }
             }

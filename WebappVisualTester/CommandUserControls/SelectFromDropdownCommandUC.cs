@@ -6,18 +6,18 @@ using WebappVisualTester.Models;
 
 namespace WebappVisualTester
 {
-    public partial class ClickButtonCommandUC : UserControl
+    public partial class SelectFromDropdownCommandUC : UserControl
     {
         IProjectManager projectManager;
-        ClickButtonCommand command;
+        SelectFromDropdownCommand command;
         Test test;
         EditTest parentForm;
         EditCommand mainCommandForm;
 
-        public ClickButtonCommandUC(ICommand command, Test test, EditTest parentForm,EditCommand mainCommandForm,IProjectManager projectManager)
+        public SelectFromDropdownCommandUC(ICommand command, Test test, EditTest parentForm,EditCommand mainCommandForm,IProjectManager projectManager)
         {
             InitializeComponent();
-            this.command = command as ClickButtonCommand;
+            this.command = command as SelectFromDropdownCommand;
             this.test = test;
             this.parentForm = parentForm;
             this.mainCommandForm = mainCommandForm;
@@ -51,7 +51,8 @@ namespace WebappVisualTester
             {
                 if (command == null || command.OrderIndex == 0)
                 {
-                    command = new ClickButtonCommand();                    
+                    command = new SelectFromDropdownCommand();
+                    
                     command.OrderIndex = 1;
                     if (test.Commands.Any())
                     {
@@ -59,8 +60,10 @@ namespace WebappVisualTester
                     }
                     test.Commands.Add(command);
                 }
-               
+
                 command.Title = mainCommandForm.GetTitle();
+                command.SelectByTextValue = cmbByTextValue.Text;
+                command.SelectedValue = txtSelectedValue.Text;
                 command.FindBy = selFindByUC.FindBy;
                 command.FindByValue = selFindByUC.FindByValue;
                 command.Wait = selFindByUC.Wait;
@@ -83,10 +86,13 @@ namespace WebappVisualTester
                 {
                     FindBy = command.FindBy,
                     FindByValue = command.FindByValue,
-                     Wait=command.Wait,
-                     ScrollToElement=command.ScrollToElement
+                    Wait = command.Wait,
+                    ScrollToElement = command.ScrollToElement
                 };
-                selectElementuc1.SetData(f);                
+                selectElementuc1.SetData(f);
+
+                cmbByTextValue.Text = command.SelectByTextValue;
+                txtSelectedValue.Text = command.SelectedValue;
                 if (command.BelongsToCommandIndex.HasValue)
                     comboBox1.SelectedValue = command.BelongsToCommandIndex;
                 else
