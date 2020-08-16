@@ -50,21 +50,20 @@ namespace WebappVisualTester
             }
             catch { }
             
-            CefSettings settings = new CefSettings();
-            // Initialize cef with the provided settings
-            settings.CefCommandLineArgs.Add("disable-gpu", "1");
-            settings.PersistSessionCookies = true;
-            settings.CachePath = @"C:\cookies";
-            Cef.Initialize(settings);
-            Cef.EnableHighDPISupport();
-
-
             DependencyInjector.Register<IProjectManager, ProjectManager>();
             DependencyInjector.Register<IPackageManager, PackageManager>();
             DependencyInjector.Register<ICommand, NavigateToUrlCommand>();
             DependencyInjector.UnityContainer.RegisterType<DeepZoomManager>();
             DependencyInjector.UnityContainer.RegisterType<VisualNavigationForm>();
+            DependencyInjector.UnityContainer.RegisterType<CefSettings>();
 
+            CefSettings settings = DependencyInjector.Retrieve<CefSettings>();
+            // Initialize cef with the provided settings
+            settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            //settings.PersistSessionCookies = true;
+            //settings.CachePath = @"C:\cookies";
+            Cef.Initialize(settings);
+            Cef.EnableHighDPISupport();
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

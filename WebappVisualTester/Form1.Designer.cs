@@ -46,6 +46,7 @@
             this.btnTestDown = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblPath = new System.Windows.Forms.Label();
             this.lblProjectPath = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -54,6 +55,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrTests)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnNewProject
@@ -98,7 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtProjectTitle.Location = new System.Drawing.Point(275, 15);
             this.txtProjectTitle.Name = "txtProjectTitle";
-            this.txtProjectTitle.Size = new System.Drawing.Size(891, 27);
+            this.txtProjectTitle.Size = new System.Drawing.Size(862, 27);
             this.txtProjectTitle.TabIndex = 2;
             // 
             // btnSaveProject
@@ -110,7 +112,7 @@
             this.btnSaveProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveProject.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSaveProject.ForeColor = System.Drawing.Color.Blue;
-            this.btnSaveProject.Location = new System.Drawing.Point(1172, 11);
+            this.btnSaveProject.Location = new System.Drawing.Point(1142, 11);
             this.btnSaveProject.Name = "btnSaveProject";
             this.btnSaveProject.Size = new System.Drawing.Size(97, 33);
             this.btnSaveProject.TabIndex = 1;
@@ -144,9 +146,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.dgrTests);
-            this.panel2.Location = new System.Drawing.Point(0, 78);
+            this.panel2.Location = new System.Drawing.Point(0, 72);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(226, 528);
+            this.panel2.Size = new System.Drawing.Size(226, 534);
             this.panel2.TabIndex = 1;
             // 
             // dgrTests
@@ -163,7 +165,7 @@
             this.dgrTests.ReadOnly = true;
             this.dgrTests.RowHeadersWidth = 51;
             this.dgrTests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgrTests.Size = new System.Drawing.Size(223, 525);
+            this.dgrTests.Size = new System.Drawing.Size(223, 531);
             this.dgrTests.TabIndex = 0;
             this.dgrTests.Text = "dataGridView1";
             this.toolTip1.SetToolTip(this.dgrTests, "Double click to edit Test");
@@ -188,16 +190,16 @@
             // 
             this.btnDuplicateTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDuplicateTest.BackColor = System.Drawing.Color.Transparent;
-            this.btnDuplicateTest.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnDuplicateTest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnDuplicateTest.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnDuplicateTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDuplicateTest.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDuplicateTest.ForeColor = System.Drawing.Color.Blue;
+            this.btnDuplicateTest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnDuplicateTest.Image = ((System.Drawing.Image)(resources.GetObject("btnDuplicateTest.Image")));
             this.btnDuplicateTest.Location = new System.Drawing.Point(97, 33);
             this.btnDuplicateTest.Name = "btnDuplicateTest";
             this.btnDuplicateTest.Size = new System.Drawing.Size(30, 30);
             this.btnDuplicateTest.TabIndex = 1;
-            this.btnDuplicateTest.Text = "⚋";
             this.btnDuplicateTest.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.btnDuplicateTest, "Duplicate Test");
             this.btnDuplicateTest.UseVisualStyleBackColor = false;
@@ -206,11 +208,11 @@
             // btnNewTest
             // 
             this.btnNewTest.BackColor = System.Drawing.Color.Transparent;
-            this.btnNewTest.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnNewTest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnNewTest.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnNewTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewTest.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnNewTest.ForeColor = System.Drawing.Color.Blue;
+            this.btnNewTest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnNewTest.Location = new System.Drawing.Point(5, 33);
             this.btnNewTest.Name = "btnNewTest";
             this.btnNewTest.Size = new System.Drawing.Size(30, 30);
@@ -224,12 +226,12 @@
             // btnTestDelete
             // 
             this.btnTestDelete.BackColor = System.Drawing.Color.Transparent;
-            this.btnTestDelete.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnTestDelete.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.btnTestDelete.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnTestDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTestDelete.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnTestDelete.ForeColor = System.Drawing.Color.Red;
-            this.btnTestDelete.Location = new System.Drawing.Point(42, 33);
+            this.btnTestDelete.Location = new System.Drawing.Point(39, 33);
             this.btnTestDelete.Name = "btnTestDelete";
             this.btnTestDelete.Size = new System.Drawing.Size(30, 30);
             this.btnTestDelete.TabIndex = 1;
@@ -254,11 +256,11 @@
             // 
             this.btnTestUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestUp.BackColor = System.Drawing.Color.Transparent;
-            this.btnTestUp.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnTestUp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnTestUp.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnTestUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTestUp.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnTestUp.ForeColor = System.Drawing.Color.Blue;
+            this.btnTestUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnTestUp.Location = new System.Drawing.Point(161, 33);
             this.btnTestUp.Name = "btnTestUp";
             this.btnTestUp.Size = new System.Drawing.Size(30, 30);
@@ -273,11 +275,11 @@
             // 
             this.btnTestDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestDown.BackColor = System.Drawing.Color.Transparent;
-            this.btnTestDown.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnTestDown.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnTestDown.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnTestDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTestDown.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnTestDown.ForeColor = System.Drawing.Color.Blue;
+            this.btnTestDown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnTestDown.Location = new System.Drawing.Point(193, 33);
             this.btnTestDown.Name = "btnTestDown";
             this.btnTestDown.Size = new System.Drawing.Size(30, 30);
@@ -297,6 +299,18 @@
             this.label2.Size = new System.Drawing.Size(41, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Title:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1246, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox1, "Project Configuration");
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblPath
             // 
@@ -326,6 +340,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1281, 695);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblProjectPath);
             this.Controls.Add(this.lblPath);
             this.Controls.Add(this.label2);
@@ -345,6 +360,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgrTests)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,6 +385,7 @@
         private System.Windows.Forms.Label lblPath;
         private System.Windows.Forms.Label lblProjectPath;
         private System.Windows.Forms.Button btnDuplicateTest;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

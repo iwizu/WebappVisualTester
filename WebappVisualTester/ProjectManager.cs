@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Reflection;
@@ -47,6 +49,11 @@ namespace WebappVisualTester
                     {
                         TypeNameHandling = TypeNameHandling.Objects
                     });
+
+                    var settings = DependencyInjector.Retrieve<CefSettings>();
+                    settings.PersistSessionCookies = this.Project.EnableCookies;
+                    settings.CachePath = this.Project.CookiesFolder;
+
                     packageManager.UnpackProject(this.Project.Id,ProjectFilename);
 
                     IsDirty = false;

@@ -153,5 +153,11 @@ namespace WebappVisualTester
                 }
             }
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            var settings=DependencyInjector.Retrieve<ProjectSettingsForm>();
+            settings.ShowDialog();
+        }
     }
 }
