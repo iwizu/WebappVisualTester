@@ -57,9 +57,9 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.Blue;
-            this.btnSave.Location = new System.Drawing.Point(532, 283);
+            this.btnSave.Location = new System.Drawing.Point(532, 289);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(97, 27);
+            this.btnSave.Size = new System.Drawing.Size(97, 33);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -71,7 +71,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(113, 238);
+            this.comboBox1.Location = new System.Drawing.Point(113, 244);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(516, 28);
             this.comboBox1.TabIndex = 4;
@@ -79,7 +79,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 214);
+            this.label3.Location = new System.Drawing.Point(107, 220);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 20);
             this.label3.TabIndex = 2;
@@ -88,7 +88,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(113, 158);
+            this.label5.Location = new System.Drawing.Point(113, 164);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 20);
             this.label5.TabIndex = 2;
@@ -98,18 +98,17 @@
             // 
             this.txtSelectedValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSelectedValue.Location = new System.Drawing.Point(113, 181);
+            this.txtSelectedValue.Location = new System.Drawing.Point(113, 187);
             this.txtSelectedValue.Name = "txtSelectedValue";
             this.txtSelectedValue.Size = new System.Drawing.Size(516, 27);
             this.txtSelectedValue.TabIndex = 3;
             // 
             // selectElementuc1
             // 
-            this.selectElementuc1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectElementuc1.Location = new System.Drawing.Point(2, 40);
+            this.selectElementuc1.Location = new System.Drawing.Point(6, 40);
+            this.selectElementuc1.MaximumSize = new System.Drawing.Size(623, 123);
             this.selectElementuc1.Name = "selectElementuc1";
-            this.selectElementuc1.Size = new System.Drawing.Size(636, 123);
+            this.selectElementuc1.Size = new System.Drawing.Size(623, 123);
             this.selectElementuc1.TabIndex = 5;
             // 
             // cmbByTextValue
@@ -118,7 +117,7 @@
             this.cmbByTextValue.Items.AddRange(new object[] {
             "By Text",
             "By Value"});
-            this.cmbByTextValue.Location = new System.Drawing.Point(6, 183);
+            this.cmbByTextValue.Location = new System.Drawing.Point(6, 189);
             this.cmbByTextValue.Name = "cmbByTextValue";
             this.cmbByTextValue.Size = new System.Drawing.Size(101, 28);
             this.cmbByTextValue.TabIndex = 4;

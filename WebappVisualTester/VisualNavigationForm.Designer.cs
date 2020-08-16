@@ -50,14 +50,14 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(1, 32);
+            this.panel1.Location = new System.Drawing.Point(1, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1158, 617);
+            this.panel1.Size = new System.Drawing.Size(1158, 609);
             this.panel1.TabIndex = 1;
             // 
             // txtTileSize
             // 
-            this.txtTileSize.Location = new System.Drawing.Point(71, 2);
+            this.txtTileSize.Location = new System.Drawing.Point(71, 5);
             this.txtTileSize.Name = "txtTileSize";
             this.txtTileSize.Size = new System.Drawing.Size(96, 27);
             this.txtTileSize.TabIndex = 2;
@@ -66,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 8);
+            this.label1.Location = new System.Drawing.Point(1, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 2;
@@ -75,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(177, 7);
+            this.label2.Location = new System.Drawing.Point(177, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 20);
             this.label2.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             // txtRows
             // 
-            this.txtRows.Location = new System.Drawing.Point(226, 2);
+            this.txtRows.Location = new System.Drawing.Point(226, 5);
             this.txtRows.Name = "txtRows";
             this.txtRows.Size = new System.Drawing.Size(96, 27);
             this.txtRows.TabIndex = 2;
@@ -92,7 +92,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(336, 5);
+            this.label3.Location = new System.Drawing.Point(336, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 20);
             this.label3.TabIndex = 2;
@@ -100,7 +100,7 @@
             // 
             // txtMargin
             // 
-            this.txtMargin.Location = new System.Drawing.Point(398, 1);
+            this.txtMargin.Location = new System.Drawing.Point(398, 4);
             this.txtMargin.Name = "txtMargin";
             this.txtMargin.Size = new System.Drawing.Size(75, 27);
             this.txtMargin.TabIndex = 2;
@@ -116,7 +116,7 @@
             this.btnRefresh.ForeColor = System.Drawing.Color.Blue;
             this.btnRefresh.Location = new System.Drawing.Point(490, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(97, 27);
+            this.btnRefresh.Size = new System.Drawing.Size(97, 33);
             this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -126,7 +126,7 @@
             // picWait
             // 
             this.picWait.Image = ((System.Drawing.Image)(resources.GetObject("picWait.Image")));
-            this.picWait.Location = new System.Drawing.Point(593, 3);
+            this.picWait.Location = new System.Drawing.Point(593, 5);
             this.picWait.Name = "picWait";
             this.picWait.Size = new System.Drawing.Size(25, 23);
             this.picWait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

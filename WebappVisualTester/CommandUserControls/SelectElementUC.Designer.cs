@@ -50,8 +50,6 @@
             // 
             // cmbFindBy
             // 
-            this.cmbFindBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFindBy.FormattingEnabled = true;
             this.cmbFindBy.Items.AddRange(new object[] {
             "Class",
@@ -80,8 +78,6 @@
             // 
             // txtType
             // 
-            this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtType.Location = new System.Drawing.Point(110, 38);
             this.txtType.Name = "txtType";
             this.txtType.Size = new System.Drawing.Size(390, 27);

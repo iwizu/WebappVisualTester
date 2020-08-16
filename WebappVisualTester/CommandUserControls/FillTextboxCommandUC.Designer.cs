@@ -56,9 +56,9 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.Blue;
-            this.btnSave.Location = new System.Drawing.Point(494, 283);
+            this.btnSave.Location = new System.Drawing.Point(495, 283);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(97, 27);
+            this.btnSave.Size = new System.Drawing.Size(97, 33);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -72,7 +72,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(113, 238);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(516, 28);
+            this.comboBox1.Size = new System.Drawing.Size(517, 28);
             this.comboBox1.TabIndex = 4;
             // 
             // label3
@@ -99,16 +99,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtText.Location = new System.Drawing.Point(113, 181);
             this.txtText.Name = "txtText";
-            this.txtText.Size = new System.Drawing.Size(516, 27);
+            this.txtText.Size = new System.Drawing.Size(517, 27);
             this.txtText.TabIndex = 3;
             // 
             // selectElementuc1
             // 
-            this.selectElementuc1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectElementuc1.Location = new System.Drawing.Point(2, 40);
+            this.selectElementuc1.Location = new System.Drawing.Point(11, 40);
+            this.selectElementuc1.MaximumSize = new System.Drawing.Size(619, 123);
             this.selectElementuc1.Name = "selectElementuc1";
-            this.selectElementuc1.Size = new System.Drawing.Size(636, 123);
+            this.selectElementuc1.Size = new System.Drawing.Size(619, 123);
             this.selectElementuc1.TabIndex = 5;
             // 
             // FillTextboxCommandUC
@@ -124,7 +123,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
             this.Name = "FillTextboxCommandUC";
-            this.Size = new System.Drawing.Size(638, 342);
+            this.Size = new System.Drawing.Size(639, 350);
             this.Load += new System.EventHandler(this.NavigateToUrlCommandUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

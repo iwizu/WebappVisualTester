@@ -126,7 +126,7 @@
             this.btnDownOrder.ForeColor = System.Drawing.Color.Gray;
             this.btnDownOrder.Location = new System.Drawing.Point(633, 71);
             this.btnDownOrder.Name = "btnDownOrder";
-            this.btnDownOrder.Size = new System.Drawing.Size(26, 27);
+            this.btnDownOrder.Size = new System.Drawing.Size(30, 30);
             this.btnDownOrder.TabIndex = 1;
             this.btnDownOrder.Text = "▼";
             this.btnDownOrder.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -144,7 +144,7 @@
             this.btnUpOrder.ForeColor = System.Drawing.Color.Gray;
             this.btnUpOrder.Location = new System.Drawing.Point(633, 38);
             this.btnUpOrder.Name = "btnUpOrder";
-            this.btnUpOrder.Size = new System.Drawing.Size(26, 27);
+            this.btnUpOrder.Size = new System.Drawing.Size(30, 30);
             this.btnUpOrder.TabIndex = 1;
             this.btnUpOrder.Text = "▲";
             this.btnUpOrder.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -160,9 +160,9 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.Blue;
-            this.btnSave.Location = new System.Drawing.Point(515, 482);
+            this.btnSave.Location = new System.Drawing.Point(515, 478);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(127, 27);
+            this.btnSave.Size = new System.Drawing.Size(127, 31);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -178,9 +178,9 @@
             this.btnCreateCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateCommand.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCreateCommand.ForeColor = System.Drawing.Color.Gray;
-            this.btnCreateCommand.Location = new System.Drawing.Point(633, 278);
+            this.btnCreateCommand.Location = new System.Drawing.Point(633, 275);
             this.btnCreateCommand.Name = "btnCreateCommand";
-            this.btnCreateCommand.Size = new System.Drawing.Size(26, 27);
+            this.btnCreateCommand.Size = new System.Drawing.Size(30, 30);
             this.btnCreateCommand.TabIndex = 1;
             this.btnCreateCommand.Text = "✎";
             this.btnCreateCommand.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -196,9 +196,9 @@
             this.btnRemoveCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveCommand.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnRemoveCommand.ForeColor = System.Drawing.Color.Red;
-            this.btnRemoveCommand.Location = new System.Drawing.Point(633, 311);
+            this.btnRemoveCommand.Location = new System.Drawing.Point(633, 308);
             this.btnRemoveCommand.Name = "btnRemoveCommand";
-            this.btnRemoveCommand.Size = new System.Drawing.Size(26, 27);
+            this.btnRemoveCommand.Size = new System.Drawing.Size(30, 30);
             this.btnRemoveCommand.TabIndex = 1;
             this.btnRemoveCommand.Text = "X";
             this.btnRemoveCommand.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -264,12 +264,12 @@
             this.btnVisualNavigation.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnVisualNavigation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnVisualNavigation.Image = ((System.Drawing.Image)(resources.GetObject("btnVisualNavigation.Image")));
-            this.btnVisualNavigation.Location = new System.Drawing.Point(492, 6);
+            this.btnVisualNavigation.Location = new System.Drawing.Point(464, 6);
             this.btnVisualNavigation.Name = "btnVisualNavigation";
-            this.btnVisualNavigation.Size = new System.Drawing.Size(135, 27);
+            this.btnVisualNavigation.Size = new System.Drawing.Size(163, 27);
             this.btnVisualNavigation.TabIndex = 1;
             this.btnVisualNavigation.Text = "Visual Navigation";
-            this.btnVisualNavigation.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnVisualNavigation.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.btnVisualNavigation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnVisualNavigation.UseVisualStyleBackColor = false;
             this.btnVisualNavigation.Click += new System.EventHandler(this.btnVisualNavigation_Click);
@@ -310,9 +310,9 @@
             // 
             this.picResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.picResult.Image = ((System.Drawing.Image)(resources.GetObject("picResult.Image")));
-            this.picResult.Location = new System.Drawing.Point(104, 481);
+            this.picResult.Location = new System.Drawing.Point(104, 479);
             this.picResult.Name = "picResult";
-            this.picResult.Size = new System.Drawing.Size(25, 23);
+            this.picResult.Size = new System.Drawing.Size(25, 25);
             this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picResult.TabIndex = 3;
             this.picResult.TabStop = false;
