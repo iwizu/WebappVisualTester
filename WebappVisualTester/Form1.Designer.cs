@@ -245,6 +245,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Gray;
             this.label1.Location = new System.Drawing.Point(82, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 28);
@@ -292,6 +293,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Gray;
             this.label2.Location = new System.Drawing.Point(233, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 20);
@@ -302,6 +304,7 @@
             // 
             this.lblPath.AutoSize = true;
             this.lblPath.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPath.ForeColor = System.Drawing.Color.Gray;
             this.lblPath.Location = new System.Drawing.Point(236, 41);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(40, 17);
@@ -312,6 +315,7 @@
             // 
             this.lblProjectPath.AutoSize = true;
             this.lblProjectPath.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblProjectPath.ForeColor = System.Drawing.Color.Gray;
             this.lblProjectPath.Location = new System.Drawing.Point(275, 42);
             this.lblProjectPath.Name = "lblProjectPath";
             this.lblProjectPath.Size = new System.Drawing.Size(13, 17);

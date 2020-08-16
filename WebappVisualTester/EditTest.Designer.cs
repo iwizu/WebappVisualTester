@@ -42,23 +42,24 @@
             this.btnExecuteTest = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.picResult = new System.Windows.Forms.PictureBox();
             this.btnVisualNavigation = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.picResult = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgrCommands)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Gray;
             this.label1.Location = new System.Drawing.Point(29, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 28);
@@ -68,6 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Gray;
             this.label2.Location = new System.Drawing.Point(29, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 20);
@@ -86,6 +88,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Gray;
             this.label3.Location = new System.Drawing.Point(3, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(87, 20);
@@ -116,11 +119,11 @@
             // 
             this.btnDownOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDownOrder.BackColor = System.Drawing.Color.Transparent;
-            this.btnDownOrder.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnDownOrder.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnDownOrder.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnDownOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownOrder.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnDownOrder.ForeColor = System.Drawing.Color.Blue;
+            this.btnDownOrder.ForeColor = System.Drawing.Color.Gray;
             this.btnDownOrder.Location = new System.Drawing.Point(633, 71);
             this.btnDownOrder.Name = "btnDownOrder";
             this.btnDownOrder.Size = new System.Drawing.Size(26, 27);
@@ -134,11 +137,11 @@
             // 
             this.btnUpOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpOrder.BackColor = System.Drawing.Color.Transparent;
-            this.btnUpOrder.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnUpOrder.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnUpOrder.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnUpOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpOrder.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnUpOrder.ForeColor = System.Drawing.Color.Blue;
+            this.btnUpOrder.ForeColor = System.Drawing.Color.Gray;
             this.btnUpOrder.Location = new System.Drawing.Point(633, 38);
             this.btnUpOrder.Name = "btnUpOrder";
             this.btnUpOrder.Size = new System.Drawing.Size(26, 27);
@@ -157,9 +160,9 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSave.ForeColor = System.Drawing.Color.Blue;
-            this.btnSave.Location = new System.Drawing.Point(567, 482);
+            this.btnSave.Location = new System.Drawing.Point(515, 482);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(97, 27);
+            this.btnSave.Size = new System.Drawing.Size(127, 27);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -170,11 +173,11 @@
             // 
             this.btnCreateCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreateCommand.BackColor = System.Drawing.Color.Transparent;
-            this.btnCreateCommand.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnCreateCommand.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnCreateCommand.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnCreateCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreateCommand.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnCreateCommand.ForeColor = System.Drawing.Color.Blue;
+            this.btnCreateCommand.ForeColor = System.Drawing.Color.Gray;
             this.btnCreateCommand.Location = new System.Drawing.Point(633, 278);
             this.btnCreateCommand.Name = "btnCreateCommand";
             this.btnCreateCommand.Size = new System.Drawing.Size(26, 27);
@@ -188,7 +191,7 @@
             // 
             this.btnRemoveCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveCommand.BackColor = System.Drawing.Color.Transparent;
-            this.btnRemoveCommand.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnRemoveCommand.FlatAppearance.BorderColor = System.Drawing.Color.Red;
             this.btnRemoveCommand.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnRemoveCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveCommand.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -235,9 +238,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.picResult);
             this.tabPage1.Controls.Add(this.btnVisualNavigation);
-            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.dgrCommands);
             this.tabPage1.Controls.Add(this.btnDownOrder);
@@ -252,42 +253,26 @@
             this.tabPage1.Text = "Commands";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // picResult
-            // 
-            this.picResult.Image = ((System.Drawing.Image)(resources.GetObject("picResult.Image")));
-            this.picResult.Location = new System.Drawing.Point(286, 10);
-            this.picResult.Name = "picResult";
-            this.picResult.Size = new System.Drawing.Size(25, 23);
-            this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picResult.TabIndex = 3;
-            this.picResult.TabStop = false;
-            // 
             // btnVisualNavigation
             // 
             this.btnVisualNavigation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnVisualNavigation.BackColor = System.Drawing.Color.Transparent;
             this.btnVisualNavigation.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnVisualNavigation.FlatAppearance.BorderSize = 0;
             this.btnVisualNavigation.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnVisualNavigation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVisualNavigation.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnVisualNavigation.ForeColor = System.Drawing.Color.Blue;
-            this.btnVisualNavigation.Location = new System.Drawing.Point(446, 6);
+            this.btnVisualNavigation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnVisualNavigation.Image = ((System.Drawing.Image)(resources.GetObject("btnVisualNavigation.Image")));
+            this.btnVisualNavigation.Location = new System.Drawing.Point(492, 6);
             this.btnVisualNavigation.Name = "btnVisualNavigation";
-            this.btnVisualNavigation.Size = new System.Drawing.Size(181, 27);
+            this.btnVisualNavigation.Size = new System.Drawing.Size(135, 27);
             this.btnVisualNavigation.TabIndex = 1;
             this.btnVisualNavigation.Text = "Visual Navigation";
             this.btnVisualNavigation.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnVisualNavigation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnVisualNavigation.UseVisualStyleBackColor = false;
             this.btnVisualNavigation.Click += new System.EventHandler(this.btnVisualNavigation_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(228, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 20);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Result:";
             // 
             // tabPage2
             // 
@@ -321,13 +306,37 @@
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
+            // picResult
+            // 
+            this.picResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.picResult.Image = ((System.Drawing.Image)(resources.GetObject("picResult.Image")));
+            this.picResult.Location = new System.Drawing.Point(104, 481);
+            this.picResult.Name = "picResult";
+            this.picResult.Size = new System.Drawing.Size(25, 23);
+            this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picResult.TabIndex = 3;
+            this.picResult.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Gray;
+            this.label5.Location = new System.Drawing.Point(13, 482);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 20);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Final Result:";
+            // 
             // EditTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.picResult);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnExecuteTest);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.label2);
@@ -339,9 +348,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picResult)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picResult)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

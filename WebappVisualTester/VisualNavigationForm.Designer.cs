@@ -40,6 +40,8 @@
             this.txtMargin = new System.Windows.Forms.TextBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.picWait = new System.Windows.Forms.PictureBox();
+            this.btnScreenshot = new System.Windows.Forms.Button();
+            this.btnCopyImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picWait)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,12 +133,56 @@
             this.picWait.TabIndex = 3;
             this.picWait.TabStop = false;
             // 
+            // btnScreenshot
+            // 
+            this.btnScreenshot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnScreenshot.BackColor = System.Drawing.Color.Transparent;
+            this.btnScreenshot.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnScreenshot.FlatAppearance.BorderSize = 0;
+            this.btnScreenshot.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnScreenshot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnScreenshot.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnScreenshot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnScreenshot.Image = ((System.Drawing.Image)(resources.GetObject("btnScreenshot.Image")));
+            this.btnScreenshot.Location = new System.Drawing.Point(1056, 2);
+            this.btnScreenshot.Name = "btnScreenshot";
+            this.btnScreenshot.Size = new System.Drawing.Size(103, 27);
+            this.btnScreenshot.TabIndex = 1;
+            this.btnScreenshot.Text = "Screenshot";
+            this.btnScreenshot.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnScreenshot.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnScreenshot.UseVisualStyleBackColor = false;
+            this.btnScreenshot.Click += new System.EventHandler(this.btnScreenshot_Click);
+            // 
+            // btnCopyImage
+            // 
+            this.btnCopyImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyImage.BackColor = System.Drawing.Color.Transparent;
+            this.btnCopyImage.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
+            this.btnCopyImage.FlatAppearance.BorderSize = 0;
+            this.btnCopyImage.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnCopyImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCopyImage.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCopyImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCopyImage.Image = ((System.Drawing.Image)(resources.GetObject("btnCopyImage.Image")));
+            this.btnCopyImage.Location = new System.Drawing.Point(971, 3);
+            this.btnCopyImage.Name = "btnCopyImage";
+            this.btnCopyImage.Size = new System.Drawing.Size(79, 27);
+            this.btnCopyImage.TabIndex = 1;
+            this.btnCopyImage.Text = "Copy";
+            this.btnCopyImage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCopyImage.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnCopyImage.UseVisualStyleBackColor = false;
+            this.btnCopyImage.Click += new System.EventHandler(this.btnCopyImage_Click);
+            // 
             // VisualNavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1161, 649);
+            this.Controls.Add(this.btnCopyImage);
+            this.Controls.Add(this.btnScreenshot);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.txtMargin);
             this.Controls.Add(this.txtRows);
@@ -169,5 +215,7 @@
         private System.Windows.Forms.TextBox txtMargin;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.PictureBox picWait;
+        private System.Windows.Forms.Button btnScreenshot;
+        private System.Windows.Forms.Button btnCopyImage;
     }
 }

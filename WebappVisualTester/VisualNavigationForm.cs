@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using WebappVisualTester.Converters;
+//using CefSharp.OffScreen;
 using WebappVisualTester.Models;
 
 namespace WebappVisualTester
@@ -139,6 +144,22 @@ namespace WebappVisualTester
         private void btnRefresh_Click(object sender, System.EventArgs e)
         {
             RefreshBrowser();
+        }
+        //https://stackoverflow.com/q/39411950
+        private void btnScreenshot_Click(object sender, System.EventArgs e)
+        {           
+                SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = "jpg";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var bitmap = ControlSnapshot.Snapshot(chromeBrowser);
+                bitmap.Save(dialog.FileName, ImageFormat.Jpeg);
+            }
+        }
+        private void btnCopyImage_Click(object sender, System.EventArgs e)
+        {
+            var bitmap = ControlSnapshot.Snapshot(chromeBrowser);
+            Clipboard.SetImage(bitmap);
         }
     }
 }
