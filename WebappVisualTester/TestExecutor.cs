@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Extensions.Logging;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -14,17 +15,20 @@ namespace WebappVisualTester
     public class TestExecutor : IDisposable
     {
         readonly IProjectManager projectManager;
+        readonly ILogger<TestExecutor> logger;
         readonly List<IWebDriver> drivers;
         readonly Test test;
-        public TestExecutor(Test test, IProjectManager projectManager)
+        public TestExecutor(Test test, IProjectManager projectManager, ILogger<TestExecutor> logger)
         {
             drivers = new List<IWebDriver>();
             this.test = test;
             this.projectManager = projectManager;
+            this.logger = logger;
         }
 
         public string Start(List<ICommand> cmds,ChromeDriver driver)
         {
+            logger.LogInformation("Start Test Execution");
             StringBuilder s = new StringBuilder();
             try
             {
@@ -169,10 +173,40 @@ namespace WebappVisualTester
                                 }
                             }
                         }
+                        else if (cmd._type.Contains(nameof(ScrollToElementCommand)))
+                        {
+                            var d = cmd as ScrollToElementCommand;
+                            if (d != null)
+                            {
+                                try
+                                {
+                                    IWebElement webElement = FindElement(driver, d.FindBy, d.FindByValue, d.Wait);
+                                    if (webElement != null)
+                                    {                                        
+                                        Actions actions = new Actions(driver);
+                                        actions.MoveToElement(webElement);
+                                        actions.Perform();
+                                        cmd.RunSuccessfuly = true;
+                                        s.AppendLine("Success: scroll to element found by " + d.FindBy + ": " + d.FindByValue + " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    }
+                                    else
+                                    {
+                                        s.AppendLine("Error: scroll to element found by " + d.FindBy + ": " + d.FindByValue + " element Found by " + d.FindBy + " : " + d.FindByValue + " , with " + (d.ScrollToElement ? "" : "no") + " scroll and wait=" + d.Wait.ToString());
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    s.AppendLine("Error: Exception:" + ex.ToString());
+                                }
+                            }
+                        }
+
                     }
                 }
             }
-            catch { }
+            catch(Exception ex) {
+                logger.LogError(ex.ToString());
+            }
             return s.ToString();
         }
 

@@ -1,5 +1,6 @@
 using CefSharp;
 using CefSharp.WinForms;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -9,6 +10,10 @@ using System.Windows.Forms;
 using Unity;
 using WebappVisualTester.Models;
 using WebappVisualTester.Packaging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Logging.Debug;
+using Unity.Microsoft.Logging;
+using Serilog;
 
 namespace WebappVisualTester
 {
@@ -49,7 +54,7 @@ namespace WebappVisualTester
                 }
             }
             catch { }
-            
+                        
             DependencyInjector.Register<IProjectManager, ProjectManager>();
             DependencyInjector.Register<IPackageManager, PackageManager>();
             DependencyInjector.Register<ICommand, NavigateToUrlCommand>();
@@ -64,6 +69,10 @@ namespace WebappVisualTester
             //settings.CachePath = @"C:\cookies";
             Cef.Initialize(settings);
             Cef.EnableHighDPISupport();
+
+            ILoggerFactory loggerFactory = LoggerFactory.Create(builder => { builder.AddDebug().AddConsole()
+                 .AddSerilog(new LoggerConfiguration().WriteTo.File("serilog.txt").CreateLogger()); });
+            DependencyInjector.UnityContainer.AddExtension(new LoggingExtension(loggerFactory));
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

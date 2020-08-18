@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,11 +10,13 @@ namespace WebappVisualTester
     public partial class Form1 : Form
     {
         IProjectManager projectManager;
-
-        public Form1(IProjectManager projectManager)
+        ILogger<Form1> logger;
+        public Form1(IProjectManager projectManager, ILogger<Form1> logger)
         {
             InitializeComponent();
             this.projectManager = projectManager;
+            this.logger = logger;
+            logger.LogInformation("Init Form1");
         }
 
         private void btnNewProject_Click(object sender, EventArgs e)

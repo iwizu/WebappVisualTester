@@ -105,6 +105,20 @@ namespace WebappVisualTester
                     cmd.Dock = DockStyle.Fill;
                 }
             }
+            else if (cmbCommandType.Text == "Scroll to element")
+            {
+                if (command == null || command.OrderIndex == 0)
+                {
+                    command = new ScrollToElementCommand();
+                }
+                var cmd = DependencyInjector.Resolve<ScrollToElementCommandUC>(new { command = command, test = test, parentForm = parentForm, mainCommandForm = this, projectManager = projectManager });
+                if (cmd != null)
+                {
+                    panel1.Controls.Add(cmd);
+                    cmd.Dock = DockStyle.Fill;
+                }
+            }
+            
         }
         public string GetTitle()
         {
@@ -143,6 +157,11 @@ namespace WebappVisualTester
                 else if (command.GetType().Equals(typeof(SelectFromDropdownCommand)))
                 {
                     cmbCommandType.Text = "Select option";
+                    cmbCommandType_SelectedIndexChanged(null, null);
+                }
+                else if (command.GetType().Equals(typeof(ScrollToElementCommand)))
+                {
+                    cmbCommandType.Text = "Scroll to element";
                     cmbCommandType_SelectedIndexChanged(null, null);
                 }
             }

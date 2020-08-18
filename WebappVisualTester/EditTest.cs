@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,15 +11,17 @@ namespace WebappVisualTester
     public partial class EditTest : UserControl
     {
         IProjectManager projectManager;
+        ILogger logger;
         Test test;
         Form1 parentForm;
 
-        public EditTest(Test test,Form1 parentForm,IProjectManager projectManager)
+        public EditTest(Test test,Form1 parentForm,IProjectManager projectManager, ILogger logger)
         {
             InitializeComponent();
             this.test = test;
             this.parentForm = parentForm;
             this.projectManager = projectManager;
+            this.logger = logger;
 
             string testFolder = Global.GetTestFolderPath(test, projectManager.Project);
             if(!Directory.Exists(testFolder+"\\Images"))
@@ -221,8 +224,12 @@ namespace WebappVisualTester
             var dziFolder = projectFolder + "\\Tests\\" + test.Id + "\\dzi";
             DeleteAllInDirectory(testImagesFolder);
             DeleteAllInDirectory(dziFolder);
+            logger.LogInformation("Execute Test started. Project folder:" + projectFolder
+                + "\nTestImagesFolder:" + testImagesFolder
+                + "\nDziFolder:" + dziFolder);
 
-            var executor=DependencyInjector.Resolve<TestExecutor>(new { test = test });
+
+            var executor =DependencyInjector.Resolve<TestExecutor>(new { test = test });
            string res= executor.Start(null,null);
             richTextBox1.Text = res;
 
